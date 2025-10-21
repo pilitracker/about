@@ -75,6 +75,35 @@
       pointer-events: none;
     }
 
+    a {
+        color: #34c759;
+        text-decoration: none;
+    }
+
+    p {
+        font-size: 15px;
+        color: #cfd6e3;
+        line-height: 1.6;
+        margin-bottom: 14px;
+    }
+
+    .appstore-badge {
+      display: inline-block;
+      transition: transform 0.2s ease;
+    }
+
+    .appstore-badge:hover {
+      transform: scale(1.05);
+    }
+
+    svg {
+        border: 2px solid #cfd6e3;
+        border-radius: 20px;
+        padding-left: 0px;
+        padding-right: 10px;
+        margin-top: 30px;
+    }
+
     .features {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -256,9 +285,14 @@
 
     langSelect.addEventListener("change", e => render(e.target.value));
 
+    const params = new URLSearchParams(window.location.search);
+    const langParam = params.get("lang");
     const browserLang = navigator.language.slice(0, 2);
-    render(translations[browserLang] ? browserLang : "en");
-    langSelect.value = translations[browserLang] ? browserLang : "en";
+    const defaultLang = translations[browserLang] ? browserLang : "en";
+    const activeLang = translations[langParam] ? langParam : defaultLang;
+  
+    render(activeLang);
+    langSelect.value = activeLang;
   </script>
 
 </body>
