@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pilik – Medication Tracker</title>
+  <style>
+    :root {
+      --accent: #34c759;
+      --bg-dark: #0e1624;
+      --bg-card: #1b2536;
+      --text-light: #fff;
+      --text-muted: #b5becd;
+    }
+
+    body {
+      font-family: -apple-system-rounded, "SF Pro Rounded", "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: relative;
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+
+    header img.logo {
+      width: 84px;
+      height: 84px;
+      border-radius: 22px;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-size: 36px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 17px;
+      color: var(--text-muted);
+      margin: 8px 0 24px;
+    }
+
+    .language-select {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    select {
+      background-color: var(--bg-card);
+      color: var(--text-light);
+      border: 1px solid #2a354a;
+      border-radius: 10px;
+      padding: 8px 28px 8px 12px;
+      font-size: 15px;
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .language-select::after {
+      content: "▼";
+      position: absolute;
+      right: 10px;
+      top: 28px;
+      color: #fff;
+      font-size: 10px;
+      pointer-events: none;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      padding: 40px 20px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .feature {
+      background-color: var(--bg-card);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    .feature h3 {
+      color: var(--accent);
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .feature p {
+      color: #cfd6e3;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .cta {
+      text-align: center;
+      margin: 60px 0;
+    }
+
+    .cta a.appstore-badge {
+      display: inline-block;
+      transition: transform 0.2s ease;
+    }
+
+    .cta a.appstore-badge:hover {
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      color: #778196;
+      font-size: 13px;
+      padding: 40px 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="language-select">
+      <select id="langSelect">
+        <option value="en">EN</option>
+        <option value="cs">CS</option>
+        <option value="fr">FR</option>
+        <option value="de">DE</option>
+        <option value="it">IT</option>
+        <option value="pl">PL</option>
+        <option value="ru">RU</option>
+        <option value="es">ES</option>
+        <option value="uk">UK</option>
+      </select>
+    </div>
+
+    <img src="pill_icon.png" alt="Pilik Logo" class="logo" />
+    <h1 id="headline">Pilik – Medication Tracker</h1>
+    <p id="subtitle">Simple. Smart. Reliable.</p>
+  </header>
+
+  <section class="features" id="features"></section>
+
+  <div class="cta">
+    <a href="https://apps.apple.com/app/idYOUR_APP_ID" target="_blank" class="appstore-badge" aria-label="Download on the App Store">
+      <svg viewBox="0 0 135 40" xmlns="http://www.w3.org/2000/svg" width="160" height="48" role="img">
+        <rect width="135" height="40" rx="8" fill="#000"/>
+        <path fill="#fff" d="M31.6 20.9c0-3.4 2.8-5 2.9-5.1-1.6-2.3-4.1-2.6-5-2.6-2.1-.2-4.1 1.2-5.1 1.2s-2.6-1.2-4.3-1.2c-2.2 0-4.2 1.3-5.3 3.3-2.3 3.9-.6 9.5 1.6 12.6 1.1 1.6 2.3 3.3 4 3.3 1.6 0 2.2-1.1 4.2-1.1 2 0 2.6 1.1 4.3 1.1 1.8 0 3-1.6 4-3.2 1.3-1.9 1.8-3.8 1.8-3.9-.1-.1-3.5-1.3-3.6-5.4zM27.9 11.4c.9-1.1 1.6-2.6 1.5-4.1-1.5.1-3.1 1-4.1 2.2-.9 1.1-1.7 2.7-1.5 4.2 1.6.1 3.2-.9 4.1-2.3z"/>
+        <text x="50" y="25" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10.5" fill="#fff">Download on the</text>
+        <text x="50" y="35" font-family="SF Pro Display, -apple-system, sans-serif" font-size="18" font-weight="700" fill="#fff">App Store</text>
+      </svg>
+    </a>
+  </div>
+
+  <footer>
+    Pilik © 2025 · All rights reserved
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        headline: "Pilik – Medication Tracker",
+        subtitle: "Stay on track with your medication routine.",
+        features: [
+          { title: "Smart Reminders", text: "Get notified exactly when it’s time to take your pills – no setup stress, no missed doses." },
+          { title: "Clean & Minimal UI", text: "A calm, modern interface that helps you focus on what really matters." },
+          { title: "Private & Secure", text: "All data is stored only on your device. No cloud. No tracking. Ever." },
+          { title: "Multi-Language Support", text: "Use Pilik in your own language. It adapts to you." },
+        ]
+      },
+      ru: {
+        headline: "Pilik – трекер приёма лекарств",
+        subtitle: "Будь вовремя. Без стресса и пропусков.",
+        features: [
+          { title: "Умные напоминания", text: "Приложение напомнит о приёме лекарства точно в нужный момент." },
+          { title: "Чистый интерфейс", text: "Современный минималистичный дизайн без лишних деталей." },
+          { title: "Полная конфиденциальность", text: "Все данные хранятся только на вашем телефоне — без облаков и учётных записей." },
+          { title: "Многоязычная поддержка", text: "Используйте Pilik на своём языке — всё адаптировано." },
+        ]
+      },
+      uk: {
+        headline: "Pilik – трекер прийому ліків",
+        subtitle: "Будь вчасно. Без зайвих турбот.",
+        features: [
+          { title: "Розумні нагадування", text: "Отримуйте сповіщення точно в потрібний момент без складних налаштувань." },
+          { title: "Простий інтерфейс", text: "Зручний, чистий дизайн без зайвого." },
+          { title: "Конфіденційність", text: "Усі дані зберігаються лише на вашому пристрої. Без хмар, без акаунтів." },
+          { title: "Багатомовність", text: "Використовуйте Pilik будь-якою мовою." },
+        ]
+      },
+      de: {
+        headline: "Pilik – Medikamenten-Erinnerung",
+        subtitle: "Behalte deine Medikamente mühelos im Blick.",
+        features: [
+          { title: "Intelligente Erinnerungen", text: "Werde genau zur richtigen Zeit erinnert – zuverlässig und einfach." },
+          { title: "Klares Design", text: "Ein minimalistisches Layout, das dich nicht ablenkt." },
+          { title: "Datenschutz zuerst", text: "Alle Daten bleiben nur auf deinem Gerät. Keine Cloud. Kein Tracking." },
+          { title: "Mehrsprachig", text: "Pilik spricht deine Sprache." },
+        ]
+      },
+      fr: {
+        headline: "Pilik – Suivi de Médicaments",
+        subtitle: "Gardez le contrôle de vos prises de médicaments.",
+        features: [
+          { title: "Rappels intelligents", text: "Recevez une notification au bon moment, sans stress ni oubli." },
+          { title: "Interface épurée", text: "Un design simple et moderne qui va droit à l’essentiel." },
+          { title: "Vie privée respectée", text: "Vos données restent sur votre appareil. Aucun suivi, aucune collecte." },
+          { title: "Disponible en plusieurs langues", text: "Pilik s’adapte à votre langue." },
+        ]
+      },
+      es: {
+        headline: "Pilik – Recordatorio de medicación",
+        subtitle: "Tu rutina médica, sin estrés ni olvidos.",
+        features: [
+          { title: "Recordatorios inteligentes", text: "Recibe notificaciones justo a tiempo para cada dosis." },
+          { title: "Diseño limpio", text: "Una interfaz moderna y relajante." },
+          { title: "Privacidad total", text: "Tus datos se guardan solo en tu dispositivo. Nada se comparte." },
+          { title: "Multilenguaje", text: "Usa Pilik en tu idioma." },
+        ]
+      },
+      it: {
+        headline: "Pilik – Promemoria per farmaci",
+        subtitle: "Tieni sotto controllo le tue medicine, facilmente.",
+        features: [
+          { title: "Promemoria intelligenti", text: "Ricevi notifiche puntuali per ogni dose." },
+          { title: "Interfaccia pulita", text: "Design moderno e rilassante, senza distrazioni." },
+          { title: "Privacy garantita", text: "Tutti i dati restano solo sul tuo dispositivo." },
+          { title: "Supporto multilingua", text: "Usa Pilik nella lingua che preferisci." },
+        ]
+      },
+      pl: {
+        headline: "Pilik – Przypomnienia o lekach",
+        subtitle: "Bez stresu. Bez pomyłek. Zawsze na czas.",
+        features: [
+          { title: "Inteligentne przypomnienia", text: "Otrzymuj powiadomienia dokładnie wtedy, gdy ich potrzebujesz." },
+          { title: "Czysty wygląd", text: "Nowoczesny, spokojny interfejs bez rozpraszania." },
+          { title: "Pełna prywatność", text: "Wszystkie dane pozostają tylko na Twoim urządzeniu." },
+          { title: "Obsługa wielu języków", text: "Używaj Pilik w swoim języku." },
+        ]
+      },
+      cs: {
+        headline: "Pilik – Připomínač léků",
+        subtitle: "Žádné zapomenuté dávky. Žádný stres.",
+        features: [
+          { title: "Chytré upozornění", text: "Aplikace ti připomene léky přesně ve správný čas." },
+          { title: "Čistý design", text: "Moderní a jednoduché rozhraní bez rušivých prvků." },
+          { title: "Soukromí", text: "Všechna data zůstávají pouze v tvém zařízení." },
+          { title: "Vícejazyčná podpora", text: "Používej Pilik ve svém jazyce." },
+        ]
+      }
+    };
+
+    const langSelect = document.getElementById("langSelect");
+    const featuresContainer = document.getElementById("features");
+    const headline = document.getElementById("headline");
+    const subtitle = document.getElementById("subtitle");
+
+    function render(lang) {
+      const t = translations[lang] || translations.en;
+      headline.textContent = t.headline;
+      subtitle.textContent = t.subtitle;
+      featuresContainer.innerHTML = "";
+      t.features.forEach(f => {
+        const div = document.createElement("div");
+        div.className = "feature";
+        div.innerHTML = `<h3>${f.title}</h3><p>${f.text}</p>`;
+        featuresContainer.appendChild(div);
+      });
+    }
+
+    langSelect.addEventListener("change", e => render(e.target.value));
+
+    const browserLang = navigator.language.slice(0, 2);
+    render(translations[browserLang] ? browserLang : "en");
+    langSelect.value = translations[browserLang] ? browserLang : "en";
+  </script>
+
+</body>
+</html>
