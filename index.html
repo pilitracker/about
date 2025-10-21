@@ -11,6 +11,7 @@
       --bg-card: #1b2536;
       --text-light: #fff;
       --text-muted: #b5becd;
+      --ring: rgba(52,199,89,.35);
     }
 
     body {
@@ -52,8 +53,7 @@
       top: 20px;
       right: 20px;
     }
-
-    select {
+    .language-select select{
       background-color: var(--bg-card);
       color: var(--text-light);
       border: 1px solid #2a354a;
@@ -63,34 +63,21 @@
       appearance: none;
       cursor: pointer;
       outline: none;
+      position: relative;
+    }
+    /* видимый caret */
+    .language-select::after {
+      content: "▼";
+      position: absolute;
+      right: 10px;
+      top: 28px;
+      color: #fff;
+      font-size: 10px;
+      pointer-events: none;
     }
 
-    a {
-      color: #34c759;
-      text-decoration: none;
-    }
-
-    p {
-      font-size: 15px;
-      color: #cfd6e3;
-      line-height: 1.6;
-      margin-bottom: 14px;
-    }
-
-    .appstore-badge {
-      display: inline-block;
-      transition: transform 0.2s ease;
-    }
-
-    .appstore-badge:hover {
-      transform: scale(1.05);
-    }
-
-    svg {
-      border: 2px solid #cfd6e3;
-      border-radius: 20px;
-      margin-top: 30px;
-    }
+    a { color: var(--accent); text-decoration: none; }
+    p { font-size: 15px; color: #cfd6e3; line-height: 1.6; margin-bottom: 14px; }
 
     .features {
       display: grid;
@@ -100,46 +87,141 @@
       max-width: 660px;
       margin: 0 auto;
     }
-
     .feature {
       background-color: var(--bg-card);
       border-radius: 20px;
       padding: 24px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 16px rgba(0,0,0,.2);
       text-align: center;
     }
+    .feature h3 { color: var(--accent); font-size: 18px; margin-bottom: 8px; }
 
-    .feature h3 {
-      color: var(--accent);
-      font-size: 18px;
-      margin-bottom: 8px;
+    /* === Premium Screenshots Showcase === */
+    .showcase {
+      position: relative;
+      padding: 20px 20px 0;
+      margin: 20px auto 0;
+      max-width: 1200px;
+    }
+    .showcase-title{
+      text-align:center;
+      font-weight:700;
+      font-size:22px;
+      margin: 10px auto 24px;
+      color:#e7ecf7;
+      opacity:.95;
     }
 
-    .screenshots {
-      max-width: 980px;
-      margin: 40px auto 0;
-      padding: 0 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      justify-items: center;
+    .devices {
+      position: relative;
+      margin: 0 auto;
+      max-width: 1100px;
+      height: clamp(360px, 48vw, 560px);
+      perspective: 1200px;
     }
 
-    .screenshots img {
+    .device {
+      position: absolute;
+      background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 34px;
+      padding: 12px;
+      box-shadow:
+        0 20px 60px rgba(0,0,0,.55),
+        0 1px 0 rgba(255,255,255,.06) inset;
+      overflow: hidden;
+      transition: transform .5s ease, box-shadow .5s ease, filter .5s ease;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .device::before{
+      /* мягкое свечение вокруг карточки */
+      content:"";
+      position:absolute; inset:-12%;
+      background: radial-gradient(60% 60% at 50% 40%, var(--ring), transparent 70%);
+      filter: blur(30px);
+      z-index:0;
+    }
+
+    .device img{
+      position: relative;
+      z-index:1;
       width: 100%;
-      border-radius: 28px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 26px;
+      display:block;
     }
 
-    .screenshots img:hover {
-      transform: scale(1.03);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+    .device figcaption{
+      position:absolute;
+      left:16px; bottom:12px;
+      z-index:2;
+      font-size:13px;
+      color:#cfd6e3;
+      background: rgba(15,25,40,.55);
+      border:1px solid rgba(255,255,255,.08);
+      padding:6px 10px;
+      border-radius: 12px;
+      backdrop-filter: blur(6px);
     }
 
-    .cta {
-      text-align: center;
-      margin: 60px 0;
+    .device-main{
+      width: clamp(260px, 32vw, 420px);
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -55%) rotateX(0deg) rotateY(0deg);
+      animation-delay: .2s;
+    }
+    .device-left{
+      width: clamp(220px, 26vw, 340px);
+      left: max(2%, calc(50% - 520px));
+      top: 52%;
+      transform: translateY(-50%) rotate(-9deg);
+      animation-delay: .6s;
+    }
+    .device-right{
+      width: clamp(220px, 26vw, 340px);
+      right: max(2%, calc(50% - 520px));
+      top: 48%;
+      transform: translateY(-50%) rotate(9deg);
+      animation-delay: .9s;
+    }
+
+    .device:hover{
+      transform: translateY(-52%) scale(1.02);
+      box-shadow: 0 24px 70px rgba(0,0,0,.65);
+      filter: saturate(1.05);
+    }
+
+    @keyframes float{
+      0%,100%{ transform: translateY(-50%) translateZ(0) }
+      50%{ transform: translateY(calc(-50% - 8px)) translateZ(8px) }
+    }
+
+    /* Mobile stacking */
+    @media (max-width: 900px){
+      .devices{
+        height: auto;
+        display: grid;
+        gap: 18px;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        perspective: none;
+      }
+      .device, .device:hover{
+        position: relative;
+        transform: none !important;
+        width: min(92%, 420px);
+        animation: none;
+      }
+    }
+
+    .cta { text-align: center; margin: 60px 0 10px; }
+    .appstore-badge { display:inline-block; transition: transform .2s ease; }
+    .appstore-badge:hover { transform: scale(1.05); }
+    .badge-shell svg{
+      border: 2px solid #cfd6e3;
+      border-radius: 20px;
+      margin-top: 30px;
     }
 
     footer {
@@ -148,25 +230,22 @@
       font-size: 13px;
       padding: 40px 20px;
     }
-
     .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 16px;
+      display:flex; flex-wrap:wrap; justify-content:center; gap:20px; margin-top:16px;
     }
-
-    .footer-links a {
+    .footer-links a{
       color: var(--text-muted);
-      text-decoration: none;
-      font-size: 14px;
-      transition: color 0.2s ease, text-shadow 0.2s ease;
+      text-decoration:none; font-size:14px;
+      transition: color .2s ease, text-shadow .2s ease;
+    }
+    .footer-links a:hover{
+      color: var(--accent);
+      text-shadow: 0 0 6px rgba(52,199,89,.4);
     }
 
-    .footer-links a:hover {
-      color: var(--accent);
-      text-shadow: 0 0 6px rgba(52, 199, 89, 0.4);
+    @media (max-width: 480px){
+      .language-select{ top:14px; right:14px; }
+      .language-select::after{ top:24px; }
     }
   </style>
 </head>
@@ -194,22 +273,38 @@
 
   <section class="features" id="features"></section>
 
-  <section class="screenshots">
-    <img src="s1.png" alt="Pilik app schedule view" />
-    <img src="s2.png" alt="Pilik app today reminders" />
-    <img src="s3.png" alt="Pilik app medication list" />
+  <!-- Premium screenshots showcase -->
+  <section class="showcase">
+    <h2 class="showcase-title" id="showcaseTitle">See Pilik in action</h2>
+    <div class="devices" aria-label="Pilik in-app screenshots">
+      <figure class="device device-left">
+        <img src="s1.jpeg" loading="lazy" alt="Schedule view" />
+        <figcaption id="capSchedule">Schedule</figcaption>
+      </figure>
+
+      <figure class="device device-main">
+        <img src="s2.jpeg" loading="lazy" alt="Today view" />
+        <figcaption id="capToday">Today</figcaption>
+      </figure>
+
+      <figure class="device device-right">
+        <img src="s3.jpeg" loading="lazy" alt="Medications list" />
+        <figcaption id="capMeds">Medications</figcaption>
+      </figure>
+    </div>
   </section>
 
   <div class="cta">
-    <svg viewBox="0 0 135 40" xmlns="http://www.w3.org/2000/svg" width="160" height="48" role="img">
-      <rect width="135" height="40" rx="8" fill="#000"/>
-      <path fill="#fff" d="M31.6 20.9c0-3.4 2.8-5 2.9-5.1-1.6-2.3-4.1-2.6-5-2.6-2.1-.2-4.1 1.2-5.1 1.2s-2.6-1.2-4.3-1.2c-2.2 0-4.2 1.3-5.3 3.3-2.3 3.9-.6 9.5 1.6 12.6 1.1 1.6 2.3 3.3 4 3.3 1.6 0 2.2-1.1 4.2-1.1 2 0 2.6 1.1 4.3 1.1 1.8 0 3-1.6 4-3.2 1.3-1.9 1.8-3.8 1.8-3.9-.1-.1-3.5-1.3-3.6-5.4zM27.9 11.4c.9-1.1 1.6-2.6 1.5-4.1-1.5.1-3.1 1-4.1 2.2-.9 1.1-1.7 2.7-1.5 4.2 1.6.1 3.2-.9 4.1-2.3z"/>
-      <text x="50" y="25" font-family="SF Pro Display, -apple-system, sans-serif" font-size="18" font-weight="700" fill="#fff">App Store</text>
-    </svg>
-
-    <p id="appstore">App Store:<br>
-      <a href="https://apps.apple.com/us/app/pilik/id6753901541" target="_blank">Pilik - Medication Tracker</a>
-    </p>
+    <a href="https://apps.apple.com/us/app/pilik/id6753901541" target="_blank" class="appstore-badge" aria-label="Download on the App Store">
+      <span class="badge-shell">
+        <svg viewBox="0 0 135 40" xmlns="http://www.w3.org/2000/svg" width="160" height="48" role="img" aria-hidden="true">
+          <rect width="135" height="40" rx="8" fill="#000"/>
+          <path fill="#fff" d="M31.6 20.9c0-3.4 2.8-5 2.9-5.1-1.6-2.3-4.1-2.6-5-2.6-2.1-.2-4.1 1.2-5.1 1.2s-2.6-1.2-4.3-1.2c-2.2 0-4.2 1.3-5.3 3.3-2.3 3.9-.6 9.5 1.6 12.6 1.1 1.6 2.3 3.3 4 3.3 1.6 0 2.2-1.1 4.2-1.1 2 0 2.6 1.1 4.3 1.1 1.8 0 3-1.6 4-3.2 1.3-1.9 1.8-3.8 1.8-3.9-.1-.1-3.5-1.3-3.6-5.4zM27.9 11.4c.9-1.1 1.6-2.6 1.5-4.1-1.5.1-3.1 1-4.1 2.2-.9 1.1-1.7 2.7-1.5 4.2 1.6.1 3.2-.9 4.1-2.3z"/>
+          <text x="50" y="25" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10.5" fill="#fff">Download on the</text>
+          <text x="50" y="35" font-family="SF Pro Display, -apple-system, sans-serif" font-size="18" font-weight="700" fill="#fff">App Store</text>
+        </svg>
+      </span>
+    </a>
   </div>
 
   <footer>
@@ -227,6 +322,8 @@
       en: {
         headline: "Pilik – Medication Tracker",
         subtitle: "Stay on track with your medication routine.",
+        showcaseTitle: "See Pilik in action",
+        caps: {schedule: "Schedule", today: "Today", meds: "Medications"},
         features: [
           { title: "Smart Reminders", text: "Get notified exactly when it’s time to take your pills – no setup stress, no missed doses." },
           { title: "Clean & Minimal UI", text: "A calm, modern interface that helps you focus on what really matters." },
@@ -237,6 +334,8 @@
       ru: {
         headline: "Pilik – трекер приёма лекарств",
         subtitle: "Будь вовремя. Без стресса и пропусков.",
+        showcaseTitle: "Посмотрите Pilik в деле",
+        caps: {schedule: "Расписание", today: "Сегодня", meds: "Лекарства"},
         features: [
           { title: "Умные напоминания", text: "Приложение напомнит о приёме лекарства точно в нужный момент." },
           { title: "Чистый интерфейс", text: "Современный минималистичный дизайн без лишних деталей." },
@@ -247,6 +346,8 @@
       uk: {
         headline: "Pilik – трекер прийому ліків",
         subtitle: "Будь вчасно. Без зайвих турбот.",
+        showcaseTitle: "Подивіться, як працює Pilik",
+        caps: {schedule: "Розклад", today: "Сьогодні", meds: "Ліки"},
         features: [
           { title: "Розумні нагадування", text: "Отримуйте сповіщення точно в потрібний момент без складних налаштувань." },
           { title: "Простий інтерфейс", text: "Зручний, чистий дизайн без зайвого." },
@@ -256,35 +357,44 @@
       }
     };
 
-    const langSelect = document.getElementById("langSelect");
-    const featuresContainer = document.getElementById("features");
-    const headline = document.getElementById("headline");
-    const subtitle = document.getElementById("subtitle");
+    const langSelect   = document.getElementById("langSelect");
+    const featuresBox  = document.getElementById("features");
+    const headlineEl   = document.getElementById("headline");
+    const subtitleEl   = document.getElementById("subtitle");
+    const showcaseTitle= document.getElementById("showcaseTitle");
+    const capSchedule  = document.getElementById("capSchedule");
+    const capToday     = document.getElementById("capToday");
+    const capMeds      = document.getElementById("capMeds");
 
-    function render(lang) {
+    function render(lang){
       const t = translations[lang] || translations.en;
-      headline.textContent = t.headline;
-      subtitle.textContent = t.subtitle;
-      featuresContainer.innerHTML = "";
-      t.features.forEach(f => {
-        const div = document.createElement("div");
-        div.className = "feature";
-        div.innerHTML = `<h3>${f.title}</h3><p>${f.text}</p>`;
-        featuresContainer.appendChild(div);
+      headlineEl.textContent   = t.headline;
+      subtitleEl.textContent   = t.subtitle;
+      showcaseTitle.textContent= t.showcaseTitle;
+      capSchedule.textContent  = t.caps.schedule;
+      capToday.textContent     = t.caps.today;
+      capMeds.textContent      = t.caps.meds;
+
+      featuresBox.innerHTML = "";
+      t.features.forEach(f=>{
+        const el = document.createElement("div");
+        el.className = "feature";
+        el.innerHTML = `<h3>${f.title}</h3><p>${f.text}</p>`;
+        featuresBox.appendChild(el);
       });
     }
 
     langSelect.addEventListener("change", e => render(e.target.value));
 
+    // поддержка ?lang=xx
     const params = new URLSearchParams(window.location.search);
-    const langParam = params.get("lang");
-    const browserLang = navigator.language.slice(0, 2);
+    const lp = params.get("lang");
+    const browserLang = navigator.language.slice(0,2);
     const defaultLang = translations[browserLang] ? browserLang : "en";
-    const activeLang = translations[langParam] ? langParam : defaultLang;
+    const activeLang  = translations[lp] ? lp : defaultLang;
 
     render(activeLang);
     langSelect.value = activeLang;
   </script>
-
 </body>
 </html>
