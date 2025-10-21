@@ -65,26 +65,16 @@
       outline: none;
     }
 
-    .language-select::after {
-      content: "";
-      position: absolute;
-      right: 10px;
-      top: 28px;
-      color: #fff;
-      font-size: 10px;
-      pointer-events: none;
-    }
-
     a {
-        color: #34c759;
-        text-decoration: none;
+      color: #34c759;
+      text-decoration: none;
     }
 
     p {
-        font-size: 15px;
-        color: #cfd6e3;
-        line-height: 1.6;
-        margin-bottom: 14px;
+      font-size: 15px;
+      color: #cfd6e3;
+      line-height: 1.6;
+      margin-bottom: 14px;
     }
 
     .appstore-badge {
@@ -97,11 +87,9 @@
     }
 
     svg {
-        border: 2px solid #cfd6e3;
-        border-radius: 20px;
-        padding-left: 0px;
-        padding-right: 10px;
-        margin-top: 30px;
+      border: 2px solid #cfd6e3;
+      border-radius: 20px;
+      margin-top: 30px;
     }
 
     .features {
@@ -127,24 +115,31 @@
       margin-bottom: 8px;
     }
 
-    .feature p {
-      color: #cfd6e3;
-      font-size: 15px;
-      line-height: 1.5;
+    .screenshots {
+      max-width: 980px;
+      margin: 40px auto 0;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      justify-items: center;
+    }
+
+    .screenshots img {
+      width: 100%;
+      border-radius: 28px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .screenshots img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
     }
 
     .cta {
       text-align: center;
       margin: 60px 0;
-    }
-
-    .cta a.appstore-badge {
-      display: inline-block;
-      transition: transform 0.2s ease;
-    }
-
-    .cta a.appstore-badge:hover {
-      transform: scale(1.05);
     }
 
     footer {
@@ -171,17 +166,7 @@
 
     .footer-links a:hover {
       color: var(--accent);
-      text-shadow: 0 0 6px rgba(52,199,89,0.4);
-    }
-
-    @media (max-width: 480px) {
-      .language-select {
-        top: 14px;
-        right: 14px;
-      }
-      .language-select::after {
-        top: 24px;
-      }
+      text-shadow: 0 0 6px rgba(52, 199, 89, 0.4);
     }
   </style>
 </head>
@@ -207,18 +192,21 @@
     <p id="subtitle">Simple. Smart. Reliable.</p>
   </header>
 
-  <section style="text-align: center;">
-    <img src="en_screen_1.png">
-  </section>
-
   <section class="features" id="features"></section>
+
+  <section class="screenshots">
+    <img src="s1.jpeg" alt="Pilik app schedule view" />
+    <img src="s2.jpeg" alt="Pilik app today reminders" />
+    <img src="s3.jpeg" alt="Pilik app medication list" />
+  </section>
 
   <div class="cta">
     <svg viewBox="0 0 135 40" xmlns="http://www.w3.org/2000/svg" width="160" height="48" role="img">
-    <rect width="135" height="40" rx="8" fill="#000"/>
-    <path fill="#fff" d="M31.6 20.9c0-3.4 2.8-5 2.9-5.1-1.6-2.3-4.1-2.6-5-2.6-2.1-.2-4.1 1.2-5.1 1.2s-2.6-1.2-4.3-1.2c-2.2 0-4.2 1.3-5.3 3.3-2.3 3.9-.6 9.5 1.6 12.6 1.1 1.6 2.3 3.3 4 3.3 1.6 0 2.2-1.1 4.2-1.1 2 0 2.6 1.1 4.3 1.1 1.8 0 3-1.6 4-3.2 1.3-1.9 1.8-3.8 1.8-3.9-.1-.1-3.5-1.3-3.6-5.4zM27.9 11.4c.9-1.1 1.6-2.6 1.5-4.1-1.5.1-3.1 1-4.1 2.2-.9 1.1-1.7 2.7-1.5 4.2 1.6.1 3.2-.9 4.1-2.3z"/>
-    <text x="50" y="25" font-family="SF Pro Display, -apple-system, sans-serif" font-size="18" font-weight="700" fill="#fff">App Store</text>
-    <path fill="#fff" d="M15 20z"/>
+      <rect width="135" height="40" rx="8" fill="#000"/>
+      <path fill="#fff" d="M31.6 20.9c0-3.4 2.8-5 2.9-5.1-1.6-2.3-4.1-2.6-5-2.6-2.1-.2-4.1 1.2-5.1 1.2s-2.6-1.2-4.3-1.2c-2.2 0-4.2 1.3-5.3 3.3-2.3 3.9-.6 9.5 1.6 12.6 1.1 1.6 2.3 3.3 4 3.3 1.6 0 2.2-1.1 4.2-1.1 2 0 2.6 1.1 4.3 1.1 1.8 0 3-1.6 4-3.2 1.3-1.9 1.8-3.8 1.8-3.9-.1-.1-3.5-1.3-3.6-5.4zM27.9 11.4c.9-1.1 1.6-2.6 1.5-4.1-1.5.1-3.1 1-4.1 2.2-.9 1.1-1.7 2.7-1.5 4.2 1.6.1 3.2-.9 4.1-2.3z"/>
+      <text x="50" y="25" font-family="SF Pro Display, -apple-system, sans-serif" font-size="18" font-weight="700" fill="#fff">App Store</text>
+    </svg>
+
     <p id="appstore">App Store:<br>
       <a href="https://apps.apple.com/us/app/pilik/id6753901541" target="_blank">Pilik - Medication Tracker</a>
     </p>
@@ -272,7 +260,6 @@
     const featuresContainer = document.getElementById("features");
     const headline = document.getElementById("headline");
     const subtitle = document.getElementById("subtitle");
-    const appstore = document.getElementById("appstore");
 
     function render(lang) {
       const t = translations[lang] || translations.en;
@@ -294,7 +281,7 @@
     const browserLang = navigator.language.slice(0, 2);
     const defaultLang = translations[browserLang] ? browserLang : "en";
     const activeLang = translations[langParam] ? langParam : defaultLang;
-  
+
     render(activeLang);
     langSelect.value = activeLang;
   </script>
