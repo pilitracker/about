@@ -124,6 +124,36 @@
       font-size: 13px;
       padding: 40px 20px;
     }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 16px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s ease, text-shadow 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+      text-shadow: 0 0 6px rgba(52,199,89,0.4);
+    }
+
+    @media (max-width: 480px) {
+      .language-select {
+        top: 14px;
+        right: 14px;
+      }
+      .language-select::after {
+        top: 24px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -162,7 +192,13 @@
   </div>
 
   <footer>
-    Pilik © 2025 · All rights reserved
+    <div>Pilik © 2025 · All rights reserved</div>
+    <div class="footer-links">
+      <a href="https://pilitracker.github.io/faq/">FAQ</a>
+      <a href="https://pilitracker.github.io/report-bug/">Report a Bug</a>
+      <a href="https://pilitracker.github.io/terms-of-service/">Terms of Service</a>
+      <a href="https://pilitracker.github.io/privacy-policy/">Privacy Policy</a>
+    </div>
   </footer>
 
   <script>
@@ -195,66 +231,6 @@
           { title: "Простий інтерфейс", text: "Зручний, чистий дизайн без зайвого." },
           { title: "Конфіденційність", text: "Усі дані зберігаються лише на вашому пристрої. Без хмар, без акаунтів." },
           { title: "Багатомовність", text: "Використовуйте Pilik будь-якою мовою." },
-        ]
-      },
-      de: {
-        headline: "Pilik – Medikamenten-Erinnerung",
-        subtitle: "Behalte deine Medikamente mühelos im Blick.",
-        features: [
-          { title: "Intelligente Erinnerungen", text: "Werde genau zur richtigen Zeit erinnert – zuverlässig und einfach." },
-          { title: "Klares Design", text: "Ein minimalistisches Layout, das dich nicht ablenkt." },
-          { title: "Datenschutz zuerst", text: "Alle Daten bleiben nur auf deinem Gerät. Keine Cloud. Kein Tracking." },
-          { title: "Mehrsprachig", text: "Pilik spricht deine Sprache." },
-        ]
-      },
-      fr: {
-        headline: "Pilik – Suivi de Médicaments",
-        subtitle: "Gardez le contrôle de vos prises de médicaments.",
-        features: [
-          { title: "Rappels intelligents", text: "Recevez une notification au bon moment, sans stress ni oubli." },
-          { title: "Interface épurée", text: "Un design simple et moderne qui va droit à l’essentiel." },
-          { title: "Vie privée respectée", text: "Vos données restent sur votre appareil. Aucun suivi, aucune collecte." },
-          { title: "Disponible en plusieurs langues", text: "Pilik s’adapte à votre langue." },
-        ]
-      },
-      es: {
-        headline: "Pilik – Recordatorio de medicación",
-        subtitle: "Tu rutina médica, sin estrés ni olvidos.",
-        features: [
-          { title: "Recordatorios inteligentes", text: "Recibe notificaciones justo a tiempo para cada dosis." },
-          { title: "Diseño limpio", text: "Una interfaz moderna y relajante." },
-          { title: "Privacidad total", text: "Tus datos se guardan solo en tu dispositivo. Nada se comparte." },
-          { title: "Multilenguaje", text: "Usa Pilik en tu idioma." },
-        ]
-      },
-      it: {
-        headline: "Pilik – Promemoria per farmaci",
-        subtitle: "Tieni sotto controllo le tue medicine, facilmente.",
-        features: [
-          { title: "Promemoria intelligenti", text: "Ricevi notifiche puntuali per ogni dose." },
-          { title: "Interfaccia pulita", text: "Design moderno e rilassante, senza distrazioni." },
-          { title: "Privacy garantita", text: "Tutti i dati restano solo sul tuo dispositivo." },
-          { title: "Supporto multilingua", text: "Usa Pilik nella lingua che preferisci." },
-        ]
-      },
-      pl: {
-        headline: "Pilik – Przypomnienia o lekach",
-        subtitle: "Bez stresu. Bez pomyłek. Zawsze na czas.",
-        features: [
-          { title: "Inteligentne przypomnienia", text: "Otrzymuj powiadomienia dokładnie wtedy, gdy ich potrzebujesz." },
-          { title: "Czysty wygląd", text: "Nowoczesny, spokojny interfejs bez rozpraszania." },
-          { title: "Pełna prywatność", text: "Wszystkie dane pozostają tylko na Twoim urządzeniu." },
-          { title: "Obsługa wielu języków", text: "Używaj Pilik w swoim języku." },
-        ]
-      },
-      cs: {
-        headline: "Pilik – Připomínač léků",
-        subtitle: "Žádné zapomenuté dávky. Žádný stres.",
-        features: [
-          { title: "Chytré upozornění", text: "Aplikace ti připomene léky přesně ve správný čas." },
-          { title: "Čistý design", text: "Moderní a jednoduché rozhraní bez rušivých prvků." },
-          { title: "Soukromí", text: "Všechna data zůstávají pouze v tvém zařízení." },
-          { title: "Vícejazyčná podpora", text: "Používej Pilik ve svém jazyce." },
         ]
       }
     };
