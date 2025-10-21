@@ -1,327 +1,994 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Pilik – Medication Tracker</title>
-<style>
-  :root{
-    --accent:#34c759;
-    --bg:#0e1624;
-    --panel:#111a2b;
-    --card:#1b2536;
-    --muted:#b5becd;
-    --text:#fff;
-    --ring: rgba(52,199,89,.35);
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pilik – Medication Tracker</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  /* Base */
-  *{box-sizing:border-box}
-  body{
-    margin:0;
-    background: var(--bg);
-    color:var(--text);
-    font-family:-apple-system-rounded,"SF Pro Rounded","SF Pro Display","SF Pro Text",-apple-system,BlinkMacSystemFont,sans-serif;
-  }
-  a{color:var(--accent);text-decoration:none}
-  .container{max-width:1200px;margin:0 auto;padding:0 20px}
+    :root {
+      --accent: #34c759;
+      --accent-glow: rgba(52, 199, 89, 0.3);
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #111111;
+      --bg-card: #1a1a1a;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0a0;
+      --border: rgba(255, 255, 255, 0.1);
+    }
 
-  /* Top Nav */
-  .nav{
-    position:sticky; top:0; z-index:50;
-    backdrop-filter:saturate(140%) blur(8px);
-    background:linear-gradient(180deg,rgba(10,15,24,.75),rgba(10,15,24,.35));
-    border-bottom:1px solid rgba(255,255,255,.06);
-  }
-  .nav-inner{
-    display:flex; align-items:center; justify-content:space-between;
-    height:68px;
-  }
-  .brand{
-    display:flex; align-items:center; gap:12px; font-weight:700;
-    letter-spacing:.2px;
-  }
-  .brand img{width:36px;height:36px;border-radius:10px}
-  .nav-links{
-    display:flex; gap:22px; align-items:center;
-  }
-  .nav-links a{color:#dde3ef;font-size:14px}
-  .nav-cta{
-    display:flex; align-items:center; gap:10px;
-  }
-  .lang{
-    position:relative;
-  }
-  .lang select{
-    background:var(--card); color:#fff; border:1px solid #2a354a;
-    border-radius:10px; padding:8px 28px 8px 12px; font-size:14px; appearance:none; outline:none; cursor:pointer;
-  }
-  .lang::after{
-    content:"▼"; position:absolute; right:10px; top:9px; font-size:10px; color:#fff; pointer-events:none;
-  }
-  .btn{
-    display:inline-flex; align-items:center; gap:8px;
-    padding:10px 16px; border-radius:999px; border:1px solid rgba(255,255,255,.12);
-    background:#0b1322; color:#fff; font-weight:700; font-size:14px;
-    box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);
-    transition:transform .2s ease, background .2s ease, box-shadow .2s ease;
-  }
-  .btn:hover{transform:translateY(-1px); box-shadow:0 8px 24px rgba(0,0,0,.35)}
-  .btn--accent{background:var(--accent); color:#0d1a12; border:none}
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
 
-  /* HERO */
-  .hero{
-    padding:36px 0 20px;
-  }
-  .hero-panel{
-    position:relative;
-    border-radius:28px;
-    border:1px solid rgba(255,255,255,.08);
-    background: radial-gradient(120% 120% at 10% -10%, rgba(52,199,89,.08), transparent 50%) , linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
-    overflow:hidden;
-  }
-  .hero-inner{
-    display:grid; grid-template-columns: 1.05fr 1fr; gap:20px; align-items:center;
-    padding:48px 34px;
-  }
-  .hero h1{
-    font-size: clamp(32px, 6vw, 56px);
-    line-height: 1.02; margin:0 0 16px;
-  }
-  .hero p{color:#cfd6e3; font-size:16px; margin:0 0 22px; max-width:520px}
-  .cta-row{display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(10, 10, 10, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
 
-  /* App Store badge (SVG in shell) */
-  .badge-shell svg{
-    border:2px solid #cfd6e3; border-radius:16px;
-  }
-  .appstore-badge{display:inline-block; transition:transform .2s ease}
-  .appstore-badge:hover{transform:scale(1.04)}
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-  /* Gradient blobs behind device */
-  .blob, .blob2{
-    position:absolute; filter: blur(40px); opacity:.9; z-index:0;
-  }
-  .blob{
-    right:-8%; top:-12%; width:520px; height:520px;
-    background: radial-gradient(60% 60% at 40% 40%, #ff4bd1 0%, #fe8a3d 45%, rgba(255,0,153,.0) 72%);
-  }
-  .blob2{
-    right:10%; bottom:-18%; width:420px; height:420px;
-    background: radial-gradient(60% 60% at 60% 50%, #7b61ff 0%, #2dd4bf 45%, rgba(0,0,0,0) 72%);
-    opacity:.55;
-  }
+    .logo-nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
 
-  /* Device showcase */
-  .device-stage{position:relative; z-index:1; display:grid; grid-template-columns: 1fr 1fr 1fr; gap:16px; align-items:end}
-  .phone{
-    position:relative;
-    border-radius:34px; padding:12px; background:linear-gradient(180deg,#0f1830,#0a1222);
-    border:1px solid rgba(255,255,255,.08);
-    box-shadow:0 20px 60px rgba(0,0,0,.5), 0 1px 0 rgba(255,255,255,.06) inset;
-  }
-  .phone img{display:block; width:100%; border-radius:26px}
-  .phone--center{transform:scale(1.06)}
-  .caption{
-    text-align:center; font-size:13px; color:#cfd6e3; margin-top:8px; opacity:.9;
-  }
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--accent);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
 
-  @media (max-width: 980px){
-    .hero-inner{grid-template-columns:1fr; gap:28px; padding:38px 20px}
-    .device-stage{grid-template-columns:1fr; gap:18px}
-    .phone--center{transform:none}
-    .blob{right:-20%; top:-20%; width:460px; height:460px}
-  }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
 
-  /* Features */
-  .features{
-    display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
-    gap:20px; padding:40px 20px; max-width:780px; margin:0 auto;
-  }
-  .feature{
-    background:var(--card); border-radius:18px; padding:22px; text-align:center;
-    box-shadow:0 4px 16px rgba(0,0,0,.22);
-  }
-  .feature h3{color:var(--accent); font-size:18px; margin:0 0 8px}
+    .language-select select {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 32px 8px 12px;
+      font-size: 14px;
+      cursor: pointer;
+      outline: none;
+    }
 
-  /* Footer */
-  footer{ text-align:center; color:#778196; font-size:13px; padding:44px 20px }
-  .footer-links{ display:flex; flex-wrap:wrap; justify-content:center; gap:20px; margin-top:16px }
-  .footer-links a{ color:#b5becd; transition: color .2s ease, text-shadow .2s ease }
-  .footer-links a:hover{ color:var(--accent); text-shadow:0 0 6px rgba(52,199,89,.4) }
-</style>
+    .btn-download-nav {
+      background: var(--accent);
+      color: #000;
+      padding: 10px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-download-nav:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px var(--accent-glow);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 180px 40px 120px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      filter: blur(80px);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 64px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 20px;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+      padding: 16px 40px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px var(--accent-glow);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-primary);
+      padding: 16px 40px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      background: rgba(52, 199, 89, 0.1);
+    }
+
+    /* Phone Showcase */
+    .phone-showcase {
+      max-width: 1400px;
+      margin: 80px auto;
+      padding: 0 40px;
+      position: relative;
+    }
+
+    .phone-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      position: relative;
+    }
+
+    .phone-mockup {
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .phone-mockup.center {
+      transform: scale(1.15);
+      z-index: 2;
+    }
+
+    .phone-mockup.side {
+      transform: scale(0.9);
+      opacity: 0.7;
+    }
+
+    .phone-frame {
+      background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+      border: 1px solid var(--border);
+      border-radius: 42px;
+      padding: 12px;
+      box-shadow: 
+        0 30px 90px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+      position: relative;
+    }
+
+    .phone-frame::before {
+      content: '';
+      position: absolute;
+      inset: -40px;
+      background: radial-gradient(circle at 50% 50%, var(--accent-glow), transparent 60%);
+      filter: blur(40px);
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .phone-mockup:hover .phone-frame::before {
+      opacity: 1;
+    }
+
+    .phone-screen {
+      width: 280px;
+      height: auto;
+      border-radius: 32px;
+      display: block;
+    }
+
+    /* Features Section */
+    .features-section {
+      max-width: 1400px;
+      margin: 120px auto;
+      padding: 0 40px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .section-title {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 40px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .feature-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--accent), #2ba84a);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 24px;
+    }
+
+    .feature-card h3 {
+      font-size: 22px;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* Detailed Feature Sections */
+    .detail-section {
+      max-width: 1400px;
+      margin: 120px auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .detail-section.reverse {
+      direction: rtl;
+    }
+
+    .detail-section.reverse > * {
+      direction: ltr;
+    }
+
+    .detail-content h2 {
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .detail-content p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .detail-image {
+      position: relative;
+    }
+
+    .detail-image img {
+      width: 100%;
+      border-radius: 24px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 900px;
+      margin: 120px auto;
+      padding: 0 40px;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .faq-question {
+      padding: 24px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 18px;
+      font-weight: 600;
+      user-select: none;
+    }
+
+    .faq-question:hover {
+      color: var(--accent);
+    }
+
+    .faq-toggle {
+      font-size: 24px;
+      transition: transform 0.3s ease;
+      color: var(--accent);
+    }
+
+    .faq-item.active .faq-toggle {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 24px;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+      padding: 0 24px 24px;
+    }
+
+    .faq-answer p {
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      max-width: 1400px;
+      margin: 120px auto 80px;
+      padding: 80px 40px;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(52, 199, 89, 0.1), rgba(52, 199, 89, 0.05));
+      border-radius: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-section h2 {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .cta-section p {
+      font-size: 20px;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 60px 40px;
+      background: var(--bg-secondary);
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .footer-desc {
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .footer-column h4 {
+      margin-bottom: 20px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    .footer-bottom {
+      max-width: 1400px;
+      margin: 40px auto 0;
+      padding-top: 30px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .phone-container {
+        gap: 20px;
+      }
+
+      .phone-screen {
+        width: 220px;
+      }
+
+      .detail-section {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .hero p {
+        font-size: 18px;
+      }
+
+      .phone-container {
+        flex-direction: column;
+      }
+
+      .phone-mockup.side {
+        display: none;
+      }
+
+      .phone-mockup.center {
+        transform: scale(1);
+      }
+
+      .section-title {
+        font-size: 36px;
+      }
+
+      .detail-content h2 {
+        font-size: 32px;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-container {
+        padding: 16px 20px;
+      }
+
+      .btn-download-nav {
+        display: none;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-  <div class="container nav-inner">
-    <div class="brand">
-      <img src="pill_icon.png" alt="Pilik logo">
-      <span>Pilik</span>
-    </div>
-    <div class="nav-links">
-      <a href="#features">Features</a>
-      <a href="https://pilitracker.github.io/faq/">FAQ</a>
-      <a href="https://pilitracker.github.io/report-bug/">Support</a>
-      <a href="https://pilitracker.github.io/privacy-policy/">Privacy</a>
-      <a href="https://pilitracker.github.io/terms-of-service/">Terms</a>
-    </div>
-    <div class="nav-cta">
-      <div class="lang">
-        <select id="langSelect">
-          <option value="en">EN</option>
-          <option value="ru">RU</option>
-          <option value="uk">UK</option>
-        </select>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo-nav">
+        <div class="logo-icon">P</div>
+        <span>Pilik</span>
       </div>
-      <a class="btn btn--accent" href="https://apps.apple.com/us/app/pilik/id6753901541" target="_blank" rel="noopener">Download App</a>
+      <div class="nav-right">
+        <div class="language-select">
+          <select id="langSelect">
+            <option value="en">EN</option>
+            <option value="ru">RU</option>
+            <option value="uk">UK</option>
+            <option value="cs">CS</option>
+            <option value="fr">FR</option>
+            <option value="de">DE</option>
+            <option value="it">IT</option>
+            <option value="pl">PL</option>
+            <option value="es">ES</option>
+          </select>
+        </div>
+        <a href="https://apps.apple.com/us/app/pilik/id6753901541" class="btn-download-nav" id="navDownload">Download</a>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="container hero-panel">
-    <div class="blob" aria-hidden="true"></div>
-    <div class="blob2" aria-hidden="true"></div>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 id="heroTitle">The Safest and Most User Friendly Medication Tracker</h1>
+      <p id="heroSubtitle">Stay on track with your medication routine. Simple reminders, private data, modern design.</p>
+      <div class="hero-buttons">
+        <a href="https://apps.apple.com/us/app/pilik/id6753901541" class="btn-primary" id="heroDownload">
+          <span>Download App</span>
+        </a>
+        <a href="#features" class="btn-secondary" id="heroLearn">Learn More</a>
+      </div>
+    </div>
+  </section>
 
-    <div class="hero-inner">
-      <!-- Left: copy -->
-      <div>
-        <h1 id="headline">Track & stay on schedule with Pilik.</h1>
-        <p id="subtitle">Simple, private medication reminders. No sign-ups, no cloud — everything stays on your iPhone.</p>
-
-        <div class="cta-row">
-          <a class="btn btn--accent" href="https://apps.apple.com/us/app/pilik/id6753901541" target="_blank" rel="noopener" id="getStarted">Get Started</a>
-
-          <a href="https://apps.apple.com/us/app/pilik/id6753901541" target="_blank" class="appstore-badge" aria-label="Download on the App Store">
-            <span class="badge-shell">
-              <svg viewBox="0 0 135 40" xmlns="http://www.w3.org/2000/svg" width="160" height="48" role="img" aria-hidden="true">
-                <rect width="135" height="40" rx="8" fill="#000"/>
-                <path fill="#fff" d="M31.6 20.9c0-3.4 2.8-5 2.9-5.1-1.6-2.3-4.1-2.6-5-2.6-2.1-.2-4.1 1.2-5.1 1.2s-2.6-1.2-4.3-1.2c-2.2 0-4.2 1.3-5.3 3.3-2.3 3.9-.6 9.5 1.6 12.6 1.1 1.6 2.3 3.3 4 3.3 1.6 0 2.2-1.1 4.2-1.1 2 0 2.6 1.1 4.3 1.1 1.8 0 3-1.6 4-3.2 1.3-1.9 1.8-3.8 1.8-3.9-.1-.1-3.5-1.3-3.6-5.4zM27.9 11.4c.9-1.1 1.6-2.6 1.5-4.1-1.5.1-3.1 1-4.1 2.2-.9 1.1-1.7 2.7-1.5 4.2 1.6.1 3.2-.9 4.1-2.3z"/>
-                <text x="50" y="25" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10.5" fill="#fff">Download on the</text>
-                <text x="50" y="35" font-family="SF Pro Display, -apple-system, sans-serif" font-size="18" font-weight="700" fill="#fff">App Store</text>
-              </svg>
-            </span>
-          </a>
+  <!-- Phone Showcase -->
+  <section class="phone-showcase">
+    <div class="phone-container">
+      <div class="phone-mockup side">
+        <div class="phone-frame">
+          <img src="s1.png" alt="Schedule view" class="phone-screen" />
         </div>
       </div>
-
-      <!-- Right: device showcase -->
-      <div class="device-stage" aria-label="App screenshots">
-        <figure class="phone">
-          <img src="s1.png" alt="Schedule view" loading="lazy">
-          <figcaption class="caption" id="capSchedule">Schedule</figcaption>
-        </figure>
-
-        <figure class="phone phone--center">
-          <img src="s2.png" alt="Today view" loading="lazy">
-          <figcaption class="caption" id="capToday">Today</figcaption>
-        </figure>
-
-        <figure class="phone">
-          <img src="s3.png" alt="Medications list" loading="lazy">
-          <figcaption class="caption" id="capMeds">Medications</figcaption>
-        </figure>
+      <div class="phone-mockup center">
+        <div class="phone-frame">
+          <img src="s2.png" alt="Today view" class="phone-screen" />
+        </div>
+      </div>
+      <div class="phone-mockup side">
+        <div class="phone-frame">
+          <img src="s3.png" alt="Medications list" class="phone-screen" />
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FEATURES -->
-<section class="container" id="features">
-  <div class="features" id="featuresGrid"></div>
-</section>
+  <!-- Features Section -->
+  <section class="features-section" id="features">
+    <div class="section-header">
+      <h2 class="section-title" id="featuresTitle">Our Top Features</h2>
+      <p class="section-subtitle" id="featuresSubtitle">Everything you need to stay on track with your medications</p>
+    </div>
+    <div class="features-grid" id="featuresGrid"></div>
+  </section>
 
-<!-- FOOTER -->
-<footer>
-  <div>Pilik © 2025 · All rights reserved</div>
-  <div class="footer-links">
-    <a href="https://pilitracker.github.io/faq/">FAQ</a>
-    <a href="https://pilitracker.github.io/report-bug/">Report a Bug</a>
-    <a href="https://pilitracker.github.io/terms-of-service/">Terms of Service</a>
-    <a href="https://pilitracker.github.io/privacy-policy/">Privacy Policy</a>
-  </div>
-</footer>
+  <!-- Detail Sections -->
+  <section class="detail-section">
+    <div class="detail-content">
+      <h2 id="detailTitle1">Smooth and Simple to Use</h2>
+      <p id="detailText1">Experience a medication tracker designed with simplicity in mind. Add medications, set reminders, and track your adherence with an interface that just works.</p>
+      <p id="detailText1b">No complicated setup. No learning curve. Just open the app and start tracking.</p>
+    </div>
+    <div class="detail-image">
+      <img src="s2.png" alt="App interface" />
+    </div>
+  </section>
 
-<script>
-  const translations = {
-    en:{
-      headline:"Track & stay on schedule with Pilik.",
-      subtitle:"Simple, private medication reminders. No sign-ups, no cloud — everything stays on your iPhone.",
-      cta:"Get Started",
-      caps:{schedule:"Schedule", today:"Today", meds:"Medications"},
-      features:[
-        {title:"Smart Reminders", text:"Get notified exactly when it’s time to take your pills – no setup stress, no missed doses."},
-        {title:"Clean & Minimal UI", text:"A calm, modern interface that helps you focus on what matters."},
-        {title:"Private & Secure", text:"All data is stored only on your device. No cloud. No tracking."},
-        {title:"Multi-language", text:"Use Pilik in English, Russian, or Ukrainian."}
-      ]
-    },
-    ru:{
-      headline:"Контролируй приём лекарств с Pilik.",
-      subtitle:"Простые и приватные напоминания. Без аккаунтов и облака — всё хранится только на iPhone.",
-      cta:"Начать",
-      caps:{schedule:"Расписание", today:"Сегодня", meds:"Лекарства"},
-      features:[
-        {title:"Умные напоминания", text:"Точные уведомления в нужный момент — без пропусков."},
-        {title:"Чистый интерфейс", text:"Спокойный минимализм — ничего лишнего."},
-        {title:"Конфиденциальность", text:"Данные остаются на устройстве. Никакой синхронизации."},
-        {title:"Мультиязычность", text:"Доступно: русский, украинский, английский."}
-      ]
-    },
-    uk:{
-      headline:"Керуйте прийомом ліків з Pilik.",
-      subtitle:"Прості та приватні нагадування. Без акаунтів і хмар — усе зберігається лише на iPhone.",
-      cta:"Почати",
-      caps:{schedule:"Розклад", today:"Сьогодні", meds:"Ліки"},
-      features:[
-        {title:"Розумні нагадування", text:"Сповіщення саме вчасно — без пропусків."},
-        {title:"Чистий інтерфейс", text:"Спокійний мінімалізм без зайвого."},
-        {title:"Конфіденційність", text:"Дані лише на пристрої. Жодної синхронізації."},
-        {title:"Багатомовність", text:"Доступно: українська, російська, англійська."}
-      ]
+  <section class="detail-section reverse">
+    <div class="detail-content">
+      <h2 id="detailTitle2">A Private and Secure Experience</h2>
+      <p id="detailText2">Your health data stays on your device. Period. No cloud sync, no accounts, no tracking. Pilik respects your privacy completely.</p>
+      <p id="detailText2b">All your medication information is stored locally and secured with your device's built-in encryption.</p>
+    </div>
+    <div class="detail-image">
+      <img src="s3.png" alt="Privacy features" />
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="section-header">
+      <h2 class="section-title" id="faqTitle">Frequently Asked Questions</h2>
+      <p class="section-subtitle" id="faqSubtitle">Find answers to common questions about Pilik</p>
+    </div>
+    <div id="faqContainer"></div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2 id="ctaTitle">Download Pilik to Get Started</h2>
+      <p id="ctaSubtitle">Join thousands of users managing their medications with ease</p>
+      <a href="https://apps.apple.com/us/app/pilik/id6753901541" class="btn-primary" id="ctaDownload">
+        <span>Download on App Store</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="logo-icon">P</div>
+          <span>Pilik</span>
+        </div>
+        <p class="footer-desc" id="footerDesc">The simple, private, and reliable medication tracker for iOS.</p>
+      </div>
+      <div class="footer-column">
+        <h4 id="footerProduct">Product</h4>
+        <div class="footer-links">
+          <a href="#features" id="footerFeatures">Features</a>
+          <a href="#" id="footerDownload">Download</a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h4 id="footerSupport">Support</h4>
+        <div class="footer-links">
+          <a href="https://pilitracker.github.io/faq/">FAQ</a>
+          <a href="https://pilitracker.github.io/report-bug/" id="footerBug">Report Bug</a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h4 id="footerLegal">Legal</h4>
+        <div class="footer-links">
+          <a href="https://pilitracker.github.io/terms-of-service/" id="footerTerms">Terms</a>
+          <a href="https://pilitracker.github.io/privacy-policy/" id="footerPrivacy">Privacy</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      Pilik © 2025 · All rights reserved
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        navDownload: "Download",
+        heroTitle: "The Safest and Most User Friendly Medication Tracker",
+        heroSubtitle: "Stay on track with your medication routine. Simple reminders, private data, modern design.",
+        heroDownload: "Download App",
+        heroLearn: "Learn More",
+        featuresTitle: "Our Top Features",
+        featuresSubtitle: "Everything you need to stay on track with your medications",
+        features: [
+          { icon: "🔔", title: "Smart Reminders", text: "Get notified exactly when it's time to take your pills. No setup stress, no missed doses." },
+          { icon: "🎨", title: "Clean & Minimal UI", text: "A calm, modern interface designed to help you focus on what really matters." },
+          { icon: "🔒", title: "Private & Secure", text: "All data stored only on your device. No cloud. No tracking. Ever." },
+          { icon: "🌍", title: "Multi-Language", text: "Use Pilik in your own language. Fully localized interface." }
+        ],
+        detailTitle1: "Smooth and Simple to Use",
+        detailText1: "Experience a medication tracker designed with simplicity in mind. Add medications, set reminders, and track your adherence with an interface that just works.",
+        detailText1b: "No complicated setup. No learning curve. Just open the app and start tracking.",
+        detailTitle2: "A Private and Secure Experience",
+        detailText2: "Your health data stays on your device. Period. No cloud sync, no accounts, no tracking. Pilik respects your privacy completely.",
+        detailText2b: "All your medication information is stored locally and secured with your device's built-in encryption.",
+        faqTitle: "Frequently Asked Questions",
+        faqSubtitle: "Find answers to common questions about Pilik",
+        faqs: [
+          { q: "Is my data safe?", a: "Yes! All your data is stored only on your device. We never upload anything to the cloud or servers. Your medication information stays completely private." },
+          { q: "Do I need an account?", a: "No account needed. Pilik works entirely on your device without requiring any registration or login." },
+          { q: "Can I use Pilik on multiple devices?", a: "Currently, Pilik stores data locally on each device. We're working on secure sync options for future updates." },
+          { q: "What languages are supported?", a: "Pilik supports English, Russian, Ukrainian, Czech, French, German, Italian, Polish, and Spanish." }
+        ],
+        ctaTitle: "Download Pilik to Get Started",
+        ctaSubtitle: "Join thousands of users managing their medications with ease",
+        ctaDownload: "Download on App Store",
+        footerDesc: "The simple, private, and reliable medication tracker for iOS.",
+        footerProduct: "Product",
+        footerFeatures: "Features",
+        footerDownload: "Download",
+        footerSupport: "Support",
+        footerBug: "Report Bug",
+        footerLegal: "Legal",
+        footerTerms: "Terms",
+        footerPrivacy: "Privacy"
+      },
+      ru: {
+        navDownload: "Скачать",
+        heroTitle: "Самый безопасный и удобный трекер приёма лекарств",
+        heroSubtitle: "Будьте вовремя с приёмом лекарств. Простые напоминания, приватные данные, современный дизайн.",
+        heroDownload: "Скачать приложение",
+        heroLearn: "Узнать больше",
+        featuresTitle: "Основные возможности",
+        featuresSubtitle: "Всё необходимое для контроля приёма лекарств",
+        features: [
+          { icon: "🔔", title: "Умные напоминания", text: "Получайте уведомления точно в нужный момент. Никакого стресса, никаких пропусков." },
+          { icon: "🎨", title: "Чистый интерфейс", text: "Современный минималистичный дизайн, который помогает сосредоточиться на главном." },
+          { icon: "🔒", title: "Полная конфиденциальность", text: "Все данные хранятся только на вашем устройстве. Без облака. Без слежки. Никогда." },
+          { icon: "🌍", title: "Многоязычность", text: "Используйте Pilik на своём языке. Полностью локализованный интерфейс." }
+        ],
+        detailTitle1: "Плавно и просто в использовании",
+        detailText1: "Трекер лекарств, созданный с упором на простоту. Добавляйте лекарства, ставьте напоминания и отслеживайте приём с интерфейсом, который просто работает.",
+        detailText1b: "Никаких сложных настроек. Никакого обучения. Просто откройте приложение и начните отслеживать.",
+        detailTitle2: "Приватный и безопасный опыт",
+        detailText2: "Ваши медицинские данные остаются на вашем устройстве. Точка. Никакой синхронизации с облаком, аккаунтов или слежки. Pilik полностью уважает вашу конфиденциальность.",
+        detailText2b: "Вся информация о лекарствах хранится локально и защищена встроенным шифрованием вашего устройства.",
+        faqTitle: "Частые вопросы",
+        faqSubtitle: "Найдите ответы на распространённые вопросы о Pilik",
+        faqs: [
+          { q: "Безопасны ли мои данные?", a: "Да! Все ваши данные хранятся только на вашем устройстве. Мы никогда ничего не загружаем в облако или на серверы. Информация о ваших лекарствах остаётся полностью приватной." },
+          { q: "Нужен ли аккаунт?", a: "Аккаунт не нужен. Pilik работает полностью на вашем устройстве без регистрации или входа." },
+          { q: "Могу ли я использовать Pilik на нескольких устройствах?", a: "Сейчас Pilik хранит данные локально на каждом устройстве. Мы работаем над безопасной синхронизацией для будущих обновлений." },
+          { q: "Какие языки поддерживаются?", a: "Pilik поддерживает английский, русский, украинский, чешский, французский, немецкий, итальянский, польский и испанский." }
+        ],
+        ctaTitle: "Скачайте Pilik, чтобы начать",
+        ctaSubtitle: "Присоединяйтесь к тысячам пользователей, управляющих своими лекарствами с лёгкостью",
+        ctaDownload: "Скачать в App Store",
+        footerDesc: "Простой, приватный и надёжный трекер лекарств для iOS.",
+        footerProduct: "Продукт",
+        footerFeatures: "Возможности",
+        footerDownload: "Скачать",
+        footerSupport: "Поддержка",
+        footerBug: "Сообщить об ошибке",
+        footerLegal: "Правовая информация",
+        footerTerms: "Условия",
+        footerPrivacy: "Конфиденциальность"
+      },
+      uk: {
+        navDownload: "Завантажити",
+        heroTitle: "Найбезпечніший і найзручніший трекер прийому ліків",
+        heroSubtitle: "Будьте вчасно з прийомом ліків. Прості нагадування, приватні дані, сучасний дизайн.",
+        heroDownload: "Завантажити застосунок",
+        heroLearn: "Дізнатися більше",
+        featuresTitle: "Основні можливості",
+        featuresSubtitle: "Все необхідне для контролю прийому ліків",
+        features: [
+          { icon: "🔔", title: "Розумні нагадування", text: "Отримуйте сповіщення точно в потрібний момент. Без стресу, без пропусків." },
+          { icon: "🎨", title: "Чистий інтерфейс", text: "Сучасний мінімалістичний дизайн, який допомагає зосередитись на головному." },
+          { icon: "🔒", title: "Повна конфіденційність", text: "Усі дані зберігаються тільки на вашому пристрої. Без хмари. Без стеження. Ніколи." },
+          { icon: "🌍", title: "Багатомовність", text: "Використовуйте Pilik своєю мовою. Повністю локалізований інтерфейс." }
+        ],
+        detailTitle1: "Плавно і просто у використанні",
+        detailText1: "Трекер ліків, створений з акцентом на простоту. Додавайте ліки, встановлюйте нагадування і відстежуйте прийом з інтерфейсом, який просто працює.",
+        detailText1b: "Ніяких складних налаштувань. Ніякого навчання. Просто відкрийте застосунок і почніть відстежувати.",
+        detailTitle2: "Приватний і безпечний досвід",
+        detailText2: "Ваші медичні дані залишаються на вашому пристрої. Крапка. Ніякої синхронізації з хмарою, акаунтів чи стеження. Pilik повністю поважає вашу конфіденційність.",
+        detailText2b: "Уся інформація про ліки зберігається локально і захищена вбудованим шифруванням вашого пристрою.",
+        faqTitle: "Часті питання",
+        faqSubtitle: "Знайдіть відповіді на поширені питання про Pilik",
+        faqs: [
+          { q: "Чи безпечні мої дані?", a: "Так! Усі ваші дані зберігаються тільки на вашому пристрої. Ми ніколи нічого не завантажуємо в хмару чи на сервери. Інформація про ваші ліки залишається повністю приватною." },
+          { q: "Чи потрібен акаунт?", a: "Акаунт не потрібен. Pilik працює повністю на вашому пристрої без реєстрації чи входу." },
+          { q: "Чи можу я використовувати Pilik на кількох пристроях?", a: "Наразі Pilik зберігає дані локально на кожному пристрої. Ми працюємо над безпечною синхронізацією для майбутніх оновлень." },
+          { q: "Які мови підтримуються?", a: "Pilik підтримує англійську, російську, українську, чеську, французьку, німецьку, італійську, польську та іспанську." }
+        ],
+        ctaTitle: "Завантажте Pilik, щоб почати",
+        ctaSubtitle: "Приєднуйтесь до тисяч користувачів, які керують своїми ліками з легкістю",
+        ctaDownload: "Завантажити в App Store",
+        footerDesc: "Простий, приватний і надійний трекер ліків для iOS.",
+        footerProduct: "Продукт",
+        footerFeatures: "Можливості",
+        footerDownload: "Завантажити",
+        footerSupport: "Підтримка",
+        footerBug: "Повідомити про помилку",
+        footerLegal: "Правова інформація",
+        footerTerms: "Умови",
+        footerPrivacy: "Конфіденційність"
+      }
+    };
+
+    function renderContent(lang) {
+      const t = translations[lang] || translations.en;
+      
+      // Update text content
+      document.getElementById('navDownload').textContent = t.navDownload;
+      document.getElementById('heroTitle').textContent = t.heroTitle;
+      document.getElementById('heroSubtitle').textContent = t.heroSubtitle;
+      document.getElementById('heroDownload').innerHTML = `<span>${t.heroDownload}</span>`;
+      document.getElementById('heroLearn').textContent = t.heroLearn;
+      document.getElementById('featuresTitle').textContent = t.featuresTitle;
+      document.getElementById('featuresSubtitle').textContent = t.featuresSubtitle;
+      document.getElementById('detailTitle1').textContent = t.detailTitle1;
+      document.getElementById('detailText1').textContent = t.detailText1;
+      document.getElementById('detailText1b').textContent = t.detailText1b;
+      document.getElementById('detailTitle2').textContent = t.detailTitle2;
+      document.getElementById('detailText2').textContent = t.detailText2;
+      document.getElementById('detailText2b').textContent = t.detailText2b;
+      document.getElementById('faqTitle').textContent = t.faqTitle;
+      document.getElementById('faqSubtitle').textContent = t.faqSubtitle;
+      document.getElementById('ctaTitle').textContent = t.ctaTitle;
+      document.getElementById('ctaSubtitle').textContent = t.ctaSubtitle;
+      document.getElementById('ctaDownload').innerHTML = `<span>${t.ctaDownload}</span>`;
+      document.getElementById('footerDesc').textContent = t.footerDesc;
+      document.getElementById('footerProduct').textContent = t.footerProduct;
+      document.getElementById('footerFeatures').textContent = t.footerFeatures;
+      document.getElementById('footerDownload').textContent = t.footerDownload;
+      document.getElementById('footerSupport').textContent = t.footerSupport;
+      document.getElementById('footerBug').textContent = t.footerBug;
+      document.getElementById('footerLegal').textContent = t.footerLegal;
+      document.getElementById('footerTerms').textContent = t.footerTerms;
+      document.getElementById('footerPrivacy').textContent = t.footerPrivacy;
+
+      // Render features
+      const featuresGrid = document.getElementById('featuresGrid');
+      featuresGrid.innerHTML = '';
+      t.features.forEach(feature => {
+        const card = document.createElement('div');
+        card.className = 'feature-card';
+        card.innerHTML = `
+          <div class="feature-icon">${feature.icon}</div>
+          <h3>${feature.title}</h3>
+          <p>${feature.text}</p>
+        `;
+        featuresGrid.appendChild(card);
+      });
+
+      // Render FAQs
+      const faqContainer = document.getElementById('faqContainer');
+      faqContainer.innerHTML = '';
+      t.faqs.forEach(faq => {
+        const item = document.createElement('div');
+        item.className = 'faq-item';
+        item.innerHTML = `
+          <div class="faq-question">
+            <span>${faq.q}</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>${faq.a}</p>
+          </div>
+        `;
+        faqContainer.appendChild(item);
+      });
+
+      // Add FAQ toggle functionality
+      document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+          const item = question.parentElement;
+          item.classList.toggle('active');
+        });
+      });
     }
-  };
 
-  const langSelect   = document.getElementById('langSelect');
-  const headlineEl   = document.getElementById('headline');
-  const subtitleEl   = document.getElementById('subtitle');
-  const ctaBtn       = document.getElementById('getStarted');
-  const capSchedule  = document.getElementById('capSchedule');
-  const capToday     = document.getElementById('capToday');
-  const capMeds      = document.getElementById('capMeds');
-  const featuresGrid = document.getElementById('featuresGrid');
-
-  function render(lang){
-    const t = translations[lang] || translations.en;
-    headlineEl.textContent = t.headline;
-    subtitleEl.textContent = t.subtitle;
-    ctaBtn.textContent     = t.cta;
-    capSchedule.textContent= t.caps.schedule;
-    capToday.textContent   = t.caps.today;
-    capMeds.textContent    = t.caps.meds;
-
-    featuresGrid.innerHTML = '';
-    t.features.forEach(f=>{
-      const node = document.createElement('div');
-      node.className='feature';
-      node.innerHTML = `<h3>${f.title}</h3><p>${f.text}</p>`;
-      featuresGrid.appendChild(node);
+    // Language selector
+    const langSelect = document.getElementById('langSelect');
+    langSelect.addEventListener('change', (e) => {
+      renderContent(e.target.value);
     });
-  }
 
-  // URL ?lang=xx support
-  const params = new URLSearchParams(location.search);
-  const lp = params.get('lang');
-  const browser = navigator.language.slice(0,2);
-  const defaultLang = translations[browser] ? browser : 'en';
-  const active = translations[lp] ? lp : defaultLang;
+    // Initial render
+    const params = new URLSearchParams(window.location.search);
+    const urlLang = params.get('lang');
+    const browserLang = navigator.language.slice(0, 2);
+    const defaultLang = translations[browserLang] ? browserLang : 'en';
+    const activeLang = translations[urlLang] ? urlLang : defaultLang;
 
-  render(active);
-  langSelect.value = active;
-  langSelect.addEventListener('change', e => render(e.target.value));
-</script>
+    langSelect.value = activeLang;
+    renderContent(activeLang);
+  </script>
+
 </body>
 </html>
