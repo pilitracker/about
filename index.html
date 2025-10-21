@@ -626,15 +626,15 @@
       <div class="nav-right">
         <div class="language-select">
           <select id="langSelect">
-            <option value="en">EN</option>
-            <option value="ru">RU</option>
-            <option value="uk">UK</option>
-            <option value="cs">CS</option>
-            <option value="fr">FR</option>
-            <option value="de">DE</option>
-            <option value="it">IT</option>
-            <option value="pl">PL</option>
-            <option value="es">ES</option>
+            <option value="en">English</option>
+            <option value="cs">Čeština</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="it">Italiano</option>
+            <option value="pl">Polski</option>
+            <option value="ru">Русский</option>
+            <option value="es">Español</option>
+            <option value="uk">Українська</option>
           </select>
         </div>
         <a href="https://apps.apple.com/us/app/pilik/id6753901541" class="btn-download-nav" id="navDownload">Download</a>
@@ -762,130 +762,376 @@
 
   <script>
     const translations = {
-      en: {
-        navDownload: "Download",
-        heroTitle: "The Safest and Most User Friendly Medication Tracker",
-        heroSubtitle: "Stay on track with your medication routine. Simple reminders, private data, modern design.",
-        heroDownload: "Download App",
-        heroLearn: "Learn More",
-        featuresTitle: "Our Top Features",
-        featuresSubtitle: "Everything you need to stay on track with your medications",
-        features: [
-          { icon: "🔔", title: "Smart Reminders", text: "Get notified exactly when it's time to take your pills. No setup stress, no missed doses." },
-          { icon: "🎨", title: "Clean & Minimal UI", text: "A calm, modern interface designed to help you focus on what really matters." },
-          { icon: "🔒", title: "Private & Secure", text: "All data stored only on your device. No cloud. No tracking. Ever." },
-          { icon: "🌍", title: "Multi-Language", text: "Use Pilik in your own language. Fully localized interface." }
-        ],
-        detailTitle1: "Smooth and Simple to Use",
-        detailText1: "Experience a medication tracker designed with simplicity in mind. Add medications, set reminders, and track your adherence with an interface that just works.",
-        detailText1b: "No complicated setup. No learning curve. Just open the app and start tracking.",
-        detailTitle2: "A Private and Secure Experience",
-        detailText2: "Your health data stays on your device. Period. No cloud sync, no accounts, no tracking. Pilik respects your privacy completely.",
-        detailText2b: "All your medication information is stored locally and secured with your device's built-in encryption.",
-        faqTitle: "Frequently Asked Questions",
-        faqSubtitle: "Find answers to common questions about Pilik",
-        faqs: [
-          { q: "Is my data safe?", a: "Yes! All your data is stored only on your device. We never upload anything to the cloud or servers. Your medication information stays completely private." },
-          { q: "Do I need an account?", a: "No account needed. Pilik works entirely on your device without requiring any registration or login." },
-          { q: "Can I use Pilik on multiple devices?", a: "Currently, Pilik stores data locally on each device. We're working on secure sync options for future updates." },
-          { q: "What languages are supported?", a: "Pilik supports English, Russian, Ukrainian, Czech, French, German, Italian, Polish, and Spanish." }
-        ],
-        ctaTitle: "Download Pilik to Get Started",
-        ctaSubtitle: "Join thousands of users managing their medications with ease",
-        ctaDownload: "Download on App Store",
-        footerDesc: "The simple, private, and reliable medication tracker for iOS.",
-        footerProduct: "Product",
-        footerFeatures: "Features",
-        footerDownload: "Download",
-        footerSupport: "Support",
-        footerBug: "Report Bug",
-        footerLegal: "Legal",
-        footerTerms: "Terms",
-        footerPrivacy: "Privacy"
-      },
-      ru: {
-        navDownload: "Скачать",
-        heroTitle: "Самый безопасный и удобный трекер приёма лекарств",
-        heroSubtitle: "Будьте вовремя с приёмом лекарств. Простые напоминания, приватные данные, современный дизайн.",
-        heroDownload: "Скачать приложение",
-        heroLearn: "Узнать больше",
-        featuresTitle: "Основные возможности",
-        featuresSubtitle: "Всё необходимое для контроля приёма лекарств",
-        features: [
-          { icon: "🔔", title: "Умные напоминания", text: "Получайте уведомления точно в нужный момент. Никакого стресса, никаких пропусков." },
-          { icon: "🎨", title: "Чистый интерфейс", text: "Современный минималистичный дизайн, который помогает сосредоточиться на главном." },
-          { icon: "🔒", title: "Полная конфиденциальность", text: "Все данные хранятся только на вашем устройстве. Без облака. Без слежки. Никогда." },
-          { icon: "🌍", title: "Многоязычность", text: "Используйте Pilik на своём языке. Полностью локализованный интерфейс." }
-        ],
-        detailTitle1: "Плавно и просто в использовании",
-        detailText1: "Трекер лекарств, созданный с упором на простоту. Добавляйте лекарства, ставьте напоминания и отслеживайте приём с интерфейсом, который просто работает.",
-        detailText1b: "Никаких сложных настроек. Никакого обучения. Просто откройте приложение и начните отслеживать.",
-        detailTitle2: "Приватный и безопасный опыт",
-        detailText2: "Ваши медицинские данные остаются на вашем устройстве. Точка. Никакой синхронизации с облаком, аккаунтов или слежки. Pilik полностью уважает вашу конфиденциальность.",
-        detailText2b: "Вся информация о лекарствах хранится локально и защищена встроенным шифрованием вашего устройства.",
-        faqTitle: "Частые вопросы",
-        faqSubtitle: "Найдите ответы на распространённые вопросы о Pilik",
-        faqs: [
-          { q: "Безопасны ли мои данные?", a: "Да! Все ваши данные хранятся только на вашем устройстве. Мы никогда ничего не загружаем в облако или на серверы. Информация о ваших лекарствах остаётся полностью приватной." },
-          { q: "Нужен ли аккаунт?", a: "Аккаунт не нужен. Pilik работает полностью на вашем устройстве без регистрации или входа." },
-          { q: "Могу ли я использовать Pilik на нескольких устройствах?", a: "Сейчас Pilik хранит данные локально на каждом устройстве. Мы работаем над безопасной синхронизацией для будущих обновлений." },
-          { q: "Какие языки поддерживаются?", a: "Pilik поддерживает английский, русский, украинский, чешский, французский, немецкий, итальянский, польский и испанский." }
-        ],
-        ctaTitle: "Скачайте Pilik, чтобы начать",
-        ctaSubtitle: "Присоединяйтесь к тысячам пользователей, управляющих своими лекарствами с лёгкостью",
-        ctaDownload: "Скачать в App Store",
-        footerDesc: "Простой, приватный и надёжный трекер лекарств для iOS.",
-        footerProduct: "Продукт",
-        footerFeatures: "Возможности",
-        footerDownload: "Скачать",
-        footerSupport: "Поддержка",
-        footerBug: "Сообщить об ошибке",
-        footerLegal: "Правовая информация",
-        footerTerms: "Условия",
-        footerPrivacy: "Конфиденциальность"
-      },
-      uk: {
-        navDownload: "Завантажити",
-        heroTitle: "Найбезпечніший і найзручніший трекер прийому ліків",
-        heroSubtitle: "Будьте вчасно з прийомом ліків. Прості нагадування, приватні дані, сучасний дизайн.",
-        heroDownload: "Завантажити застосунок",
-        heroLearn: "Дізнатися більше",
-        featuresTitle: "Основні можливості",
-        featuresSubtitle: "Все необхідне для контролю прийому ліків",
-        features: [
-          { icon: "🔔", title: "Розумні нагадування", text: "Отримуйте сповіщення точно в потрібний момент. Без стресу, без пропусків." },
-          { icon: "🎨", title: "Чистий інтерфейс", text: "Сучасний мінімалістичний дизайн, який допомагає зосередитись на головному." },
-          { icon: "🔒", title: "Повна конфіденційність", text: "Усі дані зберігаються тільки на вашому пристрої. Без хмари. Без стеження. Ніколи." },
-          { icon: "🌍", title: "Багатомовність", text: "Використовуйте Pilik своєю мовою. Повністю локалізований інтерфейс." }
-        ],
-        detailTitle1: "Плавно і просто у використанні",
-        detailText1: "Трекер ліків, створений з акцентом на простоту. Додавайте ліки, встановлюйте нагадування і відстежуйте прийом з інтерфейсом, який просто працює.",
-        detailText1b: "Ніяких складних налаштувань. Ніякого навчання. Просто відкрийте застосунок і почніть відстежувати.",
-        detailTitle2: "Приватний і безпечний досвід",
-        detailText2: "Ваші медичні дані залишаються на вашому пристрої. Крапка. Ніякої синхронізації з хмарою, акаунтів чи стеження. Pilik повністю поважає вашу конфіденційність.",
-        detailText2b: "Уся інформація про ліки зберігається локально і захищена вбудованим шифруванням вашого пристрою.",
-        faqTitle: "Часті питання",
-        faqSubtitle: "Знайдіть відповіді на поширені питання про Pilik",
-        faqs: [
-          { q: "Чи безпечні мої дані?", a: "Так! Усі ваші дані зберігаються тільки на вашому пристрої. Ми ніколи нічого не завантажуємо в хмару чи на сервери. Інформація про ваші ліки залишається повністю приватною." },
-          { q: "Чи потрібен акаунт?", a: "Акаунт не потрібен. Pilik працює повністю на вашому пристрої без реєстрації чи входу." },
-          { q: "Чи можу я використовувати Pilik на кількох пристроях?", a: "Наразі Pilik зберігає дані локально на кожному пристрої. Ми працюємо над безпечною синхронізацією для майбутніх оновлень." },
-          { q: "Які мови підтримуються?", a: "Pilik підтримує англійську, російську, українську, чеську, французьку, німецьку, італійську, польську та іспанську." }
-        ],
-        ctaTitle: "Завантажте Pilik, щоб почати",
-        ctaSubtitle: "Приєднуйтесь до тисяч користувачів, які керують своїми ліками з легкістю",
-        ctaDownload: "Завантажити в App Store",
-        footerDesc: "Простий, приватний і надійний трекер ліків для iOS.",
-        footerProduct: "Продукт",
-        footerFeatures: "Можливості",
-        footerDownload: "Завантажити",
-        footerSupport: "Підтримка",
-        footerBug: "Повідомити про помилку",
-        footerLegal: "Правова інформація",
-        footerTerms: "Умови",
-        footerPrivacy: "Конфіденційність"
-      }
-    };
+  en: {
+    navDownload: "Download",
+    heroTitle: "The Safest and Most User Friendly Medication Tracker",
+    heroSubtitle: "Stay on track with your medication routine. Simple reminders, private data, modern design.",
+    heroDownload: "Download App",
+    heroLearn: "Learn More",
+    featuresTitle: "Our Top Features",
+    featuresSubtitle: "Everything you need to stay on track with your medications",
+    features: [
+      { icon: "🔔", title: "Smart Reminders", text: "Get notified exactly when it's time to take your pills. No setup stress, no missed doses." },
+      { icon: "🎨", title: "Clean & Minimal UI", text: "A calm, modern interface designed to help you focus on what really matters." },
+      { icon: "🔒", title: "Private & Secure", text: "All data stored only on your device. No cloud. No tracking. Ever." },
+      { icon: "🌍", title: "Multi-Language", text: "Use Pilik in your own language. Fully localized interface." }
+    ],
+    detailTitle1: "Smooth and Simple to Use",
+    detailText1: "Experience a medication tracker designed with simplicity in mind. Add medications, set reminders, and track your adherence with an interface that just works.",
+    detailText1b: "No complicated setup. No learning curve. Just open the app and start tracking.",
+    detailTitle2: "A Private and Secure Experience",
+    detailText2: "Your health data stays on your device. Period. No cloud sync, no accounts, no tracking. Pilik respects your privacy completely.",
+    detailText2b: "All your medication information is stored locally and secured with your device's built-in encryption.",
+    faqTitle: "Frequently Asked Questions",
+    faqSubtitle: "Find answers to common questions about Pilik",
+    faqs: [
+      { q: "Is my data safe?", a: "Yes! All your data is stored only on your device. We never upload anything to the cloud or servers. Your medication information stays completely private." },
+      { q: "Do I need an account?", a: "No account needed. Pilik works entirely on your device without requiring any registration or login." },
+      { q: "Can I use Pilik on multiple devices?", a: "Currently, Pilik stores data locally on each device. We're working on secure sync options for future updates." },
+      { q: "What languages are supported?", a: "Pilik supports English, Russian, Ukrainian, Czech, French, German, Italian, Polish, and Spanish." }
+    ],
+    ctaTitle: "Download Pilik to Get Started",
+    ctaSubtitle: "Join thousands of users managing their medications with ease",
+    ctaDownload: "Download on App Store",
+    footerDesc: "The simple, private, and reliable medication tracker for iOS.",
+    footerProduct: "Product",
+    footerFeatures: "Features",
+    footerDownload: "Download",
+    footerSupport: "Support",
+    footerBug: "Report Bug",
+    footerLegal: "Legal",
+    footerTerms: "Terms",
+    footerPrivacy: "Privacy"
+  },
+  cs: {
+    navDownload: "Stáhnout",
+    heroTitle: "Nejbezpečnější a nejpohodlnější sledování léků",
+    heroSubtitle: "Buďte na správné cestě s vaším lékovým režimem. Jednoduché připomínky, soukromá data, moderní design.",
+    heroDownload: "Stáhnout aplikaci",
+    heroLearn: "Zjistit více",
+    featuresTitle: "Hlavní funkce",
+    featuresSubtitle: "Vše, co potřebujete pro sledování vašich léků",
+    features: [
+      { icon: "🔔", title: "Chytré připomínky", text: "Dostanete upozornění přesně v čas, kdy máte vzít léky. Bez stresu, bez vynechaných dávek." },
+      { icon: "🎨", title: "Čisté rozhraní", text: "Klidné, moderní rozhraní navržené tak, abyste se mohli soustředit na to, na čem záleží." },
+      { icon: "🔒", title: "Soukromí a bezpečnost", text: "Všechna data jsou uložena pouze ve vašem zařízení. Žádný cloud. Žádné sledování. Nikdy." },
+      { icon: "🌍", title: "Vícejazyčnost", text: "Používejte Pilik ve svém vlastním jazyce. Plně lokalizované rozhraní." }
+    ],
+    detailTitle1: "Hladké a jednoduché použití",
+    detailText1: "Zažijte sledování léků navržené s důrazem na jednoduchost. Přidávejte léky, nastavujte připomínky a sledujte dodržování s rozhraním, které jednoduše funguje.",
+    detailText1b: "Žádné komplikované nastavení. Žádná křivka učení. Jen otevřete aplikaci a začněte sledovat.",
+    detailTitle2: "Soukromé a bezpečné prostředí",
+    detailText2: "Vaše zdravotní data zůstávají ve vašem zařízení. Tečka. Žádná cloudová synchronizace, žádné účty, žádné sledování. Pilik plně respektuje vaše soukromí.",
+    detailText2b: "Všechny informace o vašich lécích jsou uloženy lokálně a zabezpečeny vestavěným šifrováním vašeho zařízení.",
+    faqTitle: "Často kladené otázky",
+    faqSubtitle: "Najděte odpovědi na běžné otázky o Pilik",
+    faqs: [
+      { q: "Jsou moje data v bezpečí?", a: "Ano! Všechna vaše data jsou uložena pouze ve vašem zařízení. Nikdy nic nenahrávame do cloudu nebo na servery. Vaše informace o lécích zůstávají zcela soukromé." },
+      { q: "Potřebuji účet?", a: "Účet není potřeba. Pilik funguje zcela ve vašem zařízení bez nutnosti registrace nebo přihlášení." },
+      { q: "Mohu používat Pilik na více zařízeních?", a: "V současné době Pilik ukládá data lokálně na každém zařízení. Pracujeme na možnostech bezpečné synchronizace pro budoucí aktualizace." },
+      { q: "Jaké jazyky jsou podporovány?", a: "Pilik podporuje angličtinu, ruštinu, ukrajinštinu, češtinu, francouzštinu, němčinu, italštinu, polštinu a španělštinu." }
+    ],
+    ctaTitle: "Stáhněte si Pilik a začněte",
+    ctaSubtitle: "Připojte se k tisícům uživatelů, kteří snadno spravují své léky",
+    ctaDownload: "Stáhnout v App Store",
+    footerDesc: "Jednoduchý, soukromý a spolehlivý sledovač léků pro iOS.",
+    footerProduct: "Produkt",
+    footerFeatures: "Funkce",
+    footerDownload: "Stáhnout",
+    footerSupport: "Podpora",
+    footerBug: "Nahlásit chybu",
+    footerLegal: "Právní informace",
+    footerTerms: "Podmínky",
+    footerPrivacy: "Soukromí"
+  },
+  fr: {
+    navDownload: "Télécharger",
+    heroTitle: "Le tracker de médicaments le plus sûr et le plus convivial",
+    heroSubtitle: "Restez sur la bonne voie avec votre routine médicamenteuse. Rappels simples, données privées, design moderne.",
+    heroDownload: "Télécharger l'app",
+    heroLearn: "En savoir plus",
+    featuresTitle: "Nos principales fonctionnalités",
+    featuresSubtitle: "Tout ce dont vous avez besoin pour suivre vos médicaments",
+    features: [
+      { icon: "🔔", title: "Rappels intelligents", text: "Soyez averti exactement quand il est temps de prendre vos médicaments. Aucun stress, aucune dose manquée." },
+      { icon: "🎨", title: "Interface épurée", text: "Une interface calme et moderne conçue pour vous aider à vous concentrer sur ce qui compte vraiment." },
+      { icon: "🔒", title: "Privé et sécurisé", text: "Toutes les données sont stockées uniquement sur votre appareil. Pas de cloud. Pas de suivi. Jamais." },
+      { icon: "🌍", title: "Multilingue", text: "Utilisez Pilik dans votre propre langue. Interface entièrement localisée." }
+    ],
+    detailTitle1: "Fluide et simple à utiliser",
+    detailText1: "Découvrez un tracker de médicaments conçu dans un souci de simplicité. Ajoutez des médicaments, définissez des rappels et suivez votre observance avec une interface qui fonctionne tout simplement.",
+    detailText1b: "Aucune configuration compliquée. Aucune courbe d'apprentissage. Ouvrez simplement l'application et commencez le suivi.",
+    detailTitle2: "Une expérience privée et sécurisée",
+    detailText2: "Vos données de santé restent sur votre appareil. Point final. Pas de synchronisation cloud, pas de comptes, pas de suivi. Pilik respecte totalement votre vie privée.",
+    detailText2b: "Toutes vos informations médicamenteuses sont stockées localement et sécurisées avec le chiffrement intégré de votre appareil.",
+    faqTitle: "Questions fréquemment posées",
+    faqSubtitle: "Trouvez des réponses aux questions courantes sur Pilik",
+    faqs: [
+      { q: "Mes données sont-elles en sécurité?", a: "Oui! Toutes vos données sont stockées uniquement sur votre appareil. Nous ne téléchargeons jamais rien dans le cloud ou sur des serveurs. Vos informations médicamenteuses restent totalement privées." },
+      { q: "Ai-je besoin d'un compte?", a: "Aucun compte nécessaire. Pilik fonctionne entièrement sur votre appareil sans nécessiter d'inscription ou de connexion." },
+      { q: "Puis-je utiliser Pilik sur plusieurs appareils?", a: "Actuellement, Pilik stocke les données localement sur chaque appareil. Nous travaillons sur des options de synchronisation sécurisée pour les futures mises à jour." },
+      { q: "Quelles langues sont prises en charge?", a: "Pilik prend en charge l'anglais, le russe, l'ukrainien, le tchèque, le français, l'allemand, l'italien, le polonais et l'espagnol." }
+    ],
+    ctaTitle: "Téléchargez Pilik pour commencer",
+    ctaSubtitle: "Rejoignez des milliers d'utilisateurs qui gèrent leurs médicaments facilement",
+    ctaDownload: "Télécharger sur l'App Store",
+    footerDesc: "Le tracker de médicaments simple, privé et fiable pour iOS.",
+    footerProduct: "Produit",
+    footerFeatures: "Fonctionnalités",
+    footerDownload: "Télécharger",
+    footerSupport: "Support",
+    footerBug: "Signaler un bug",
+    footerLegal: "Légal",
+    footerTerms: "Conditions",
+    footerPrivacy: "Confidentialité"
+  },
+  de: {
+    navDownload: "Herunterladen",
+    heroTitle: "Der sicherste und benutzerfreundlichste Medikamenten-Tracker",
+    heroSubtitle: "Bleiben Sie auf Kurs mit Ihrer Medikamentenroutine. Einfache Erinnerungen, private Daten, modernes Design.",
+    heroDownload: "App herunterladen",
+    heroLearn: "Mehr erfahren",
+    featuresTitle: "Unsere Top-Funktionen",
+    featuresSubtitle: "Alles, was Sie brauchen, um Ihre Medikamente im Blick zu behalten",
+    features: [
+      { icon: "🔔", title: "Intelligente Erinnerungen", text: "Werden Sie genau dann benachrichtigt, wenn es Zeit ist, Ihre Medikamente einzunehmen. Kein Stress, keine verpassten Dosen." },
+      { icon: "🎨", title: "Klare Benutzeroberfläche", text: "Eine ruhige, moderne Oberfläche, die Ihnen hilft, sich auf das Wesentliche zu konzentrieren." },
+      { icon: "🔒", title: "Privat und sicher", text: "Alle Daten werden nur auf Ihrem Gerät gespeichert. Keine Cloud. Kein Tracking. Niemals." },
+      { icon: "🌍", title: "Mehrsprachig", text: "Verwenden Sie Pilik in Ihrer eigenen Sprache. Vollständig lokalisierte Oberfläche." }
+    ],
+    detailTitle1: "Reibungslos und einfach zu bedienen",
+    detailText1: "Erleben Sie einen Medikamenten-Tracker, der mit Blick auf Einfachheit entwickelt wurde. Fügen Sie Medikamente hinzu, stellen Sie Erinnerungen ein und verfolgen Sie Ihre Einhaltung mit einer Oberfläche, die einfach funktioniert.",
+    detailText1b: "Keine komplizierte Einrichtung. Keine Lernkurve. Öffnen Sie einfach die App und beginnen Sie mit der Verfolgung.",
+    detailTitle2: "Ein privates und sicheres Erlebnis",
+    detailText2: "Ihre Gesundheitsdaten bleiben auf Ihrem Gerät. Punkt. Keine Cloud-Synchronisation, keine Konten, kein Tracking. Pilik respektiert Ihre Privatsphäre vollständig.",
+    detailText2b: "Alle Ihre Medikamenteninformationen werden lokal gespeichert und mit der integrierten Verschlüsselung Ihres Geräts gesichert.",
+    faqTitle: "Häufig gestellte Fragen",
+    faqSubtitle: "Finden Sie Antworten auf häufige Fragen zu Pilik",
+    faqs: [
+      { q: "Sind meine Daten sicher?", a: "Ja! Alle Ihre Daten werden nur auf Ihrem Gerät gespeichert. Wir laden niemals etwas in die Cloud oder auf Server hoch. Ihre Medikamenteninformationen bleiben vollständig privat." },
+      { q: "Benötige ich ein Konto?", a: "Kein Konto erforderlich. Pilik funktioniert vollständig auf Ihrem Gerät ohne Registrierung oder Anmeldung." },
+      { q: "Kann ich Pilik auf mehreren Geräten verwenden?", a: "Derzeit speichert Pilik Daten lokal auf jedem Gerät. Wir arbeiten an sicheren Synchronisierungsoptionen für zukünftige Updates." },
+      { q: "Welche Sprachen werden unterstützt?", a: "Pilik unterstützt Englisch, Russisch, Ukrainisch, Tschechisch, Französisch, Deutsch, Italienisch, Polnisch und Spanisch." }
+    ],
+    ctaTitle: "Laden Sie Pilik herunter, um loszulegen",
+    ctaSubtitle: "Schließen Sie sich Tausenden von Benutzern an, die ihre Medikamente mit Leichtigkeit verwalten",
+    ctaDownload: "Im App Store herunterladen",
+    footerDesc: "Der einfache, private und zuverlässige Medikamenten-Tracker für iOS.",
+    footerProduct: "Produkt",
+    footerFeatures: "Funktionen",
+    footerDownload: "Herunterladen",
+    footerSupport: "Support",
+    footerBug: "Fehler melden",
+    footerLegal: "Rechtliches",
+    footerTerms: "Bedingungen",
+    footerPrivacy: "Datenschutz"
+  },
+  it: {
+    navDownload: "Scarica",
+    heroTitle: "Il tracker di farmaci più sicuro e facile da usare",
+    heroSubtitle: "Resta in carreggiata con la tua routine di farmaci. Promemoria semplici, dati privati, design moderno.",
+    heroDownload: "Scarica l'app",
+    heroLearn: "Scopri di più",
+    featuresTitle: "Le nostre migliori funzionalità",
+    featuresSubtitle: "Tutto ciò di cui hai bisogno per tenere traccia dei tuoi farmaci",
+    features: [
+      { icon: "🔔", title: "Promemoria intelligenti", text: "Ricevi notifiche esattamente quando è il momento di prendere i tuoi farmaci. Niente stress, nessuna dose mancata." },
+      { icon: "🎨", title: "Interfaccia pulita", text: "Un'interfaccia calma e moderna progettata per aiutarti a concentrarti su ciò che conta davvero." },
+      { icon: "🔒", title: "Privato e sicuro", text: "Tutti i dati sono memorizzati solo sul tuo dispositivo. Nessun cloud. Nessun tracciamento. Mai." },
+      { icon: "🌍", title: "Multilingue", text: "Usa Pilik nella tua lingua. Interfaccia completamente localizzata." }
+    ],
+    detailTitle1: "Fluido e semplice da usare",
+    detailText1: "Sperimenta un tracker di farmaci progettato con la semplicità in mente. Aggiungi farmaci, imposta promemoria e monitora l'aderenza con un'interfaccia che funziona semplicemente.",
+    detailText1b: "Nessuna configurazione complicata. Nessuna curva di apprendimento. Apri semplicemente l'app e inizia a tracciare.",
+    detailTitle2: "Un'esperienza privata e sicura",
+    detailText2: "I tuoi dati sanitari rimangono sul tuo dispositivo. Punto. Nessuna sincronizzazione cloud, nessun account, nessun tracciamento. Pilik rispetta completamente la tua privacy.",
+    detailText2b: "Tutte le informazioni sui tuoi farmaci sono memorizzate localmente e protette con la crittografia integrata del tuo dispositivo.",
+    faqTitle: "Domande frequenti",
+    faqSubtitle: "Trova risposte alle domande comuni su Pilik",
+    faqs: [
+      { q: "I miei dati sono al sicuro?", a: "Sì! Tutti i tuoi dati sono memorizzati solo sul tuo dispositivo. Non carichiamo mai nulla sul cloud o sui server. Le tue informazioni sui farmaci rimangono completamente private." },
+      { q: "Ho bisogno di un account?", a: "Nessun account necessario. Pilik funziona interamente sul tuo dispositivo senza richiedere registrazione o accesso." },
+      { q: "Posso usare Pilik su più dispositivi?", a: "Attualmente, Pilik memorizza i dati localmente su ogni dispositivo. Stiamo lavorando su opzioni di sincronizzazione sicura per aggiornamenti futuri." },
+      { q: "Quali lingue sono supportate?", a: "Pilik supporta inglese, russo, ucraino, ceco, francese, tedesco, italiano, polacco e spagnolo." }
+    ],
+    ctaTitle: "Scarica Pilik per iniziare",
+    ctaSubtitle: "Unisciti a migliaia di utenti che gestiscono i loro farmaci con facilità",
+    ctaDownload: "Scarica su App Store",
+    footerDesc: "Il tracker di farmaci semplice, privato e affidabile per iOS.",
+    footerProduct: "Prodotto",
+    footerFeatures: "Funzionalità",
+    footerDownload: "Scarica",
+    footerSupport: "Supporto",
+    footerBug: "Segnala un bug",
+    footerLegal: "Legale",
+    footerTerms: "Termini",
+    footerPrivacy: "Privacy"
+  },
+  pl: {
+    navDownload: "Pobierz",
+    heroTitle: "Najbezpieczniejszy i najbardziej przyjazny tracker leków",
+    heroSubtitle: "Bądź na bieżąco z przyjmowaniem leków. Proste przypomnienia, prywatne dane, nowoczesny design.",
+    heroDownload: "Pobierz aplikację",
+    heroLearn: "Dowiedz się więcej",
+    featuresTitle: "Nasze najlepsze funkcje",
+    featuresSubtitle: "Wszystko, czego potrzebujesz, aby śledzić swoje leki",
+    features: [
+      { icon: "🔔", title: "Inteligentne przypomnienia", text: "Otrzymuj powiadomienia dokładnie wtedy, gdy nadejdzie czas na przyjęcie leków. Bez stresu, bez pominiętych dawek." },
+      { icon: "🎨", title: "Czysty interfejs", text: "Spokojny, nowoczesny interfejs zaprojektowany, aby pomóc Ci skupić się na tym, co naprawdę ważne." },
+      { icon: "🔒", title: "Prywatne i bezpieczne", text: "Wszystkie dane przechowywane tylko na Twoim urządzeniu. Bez chmury. Bez śledzenia. Nigdy." },
+      { icon: "🌍", title: "Wielojęzyczność", text: "Używaj Pilik we własnym języku. W pełni zlokalizowany interfejs." }
+    ],
+    detailTitle1: "Płynne i proste w użyciu",
+    detailText1: "Poznaj tracker leków zaprojektowany z myślą o prostocie. Dodawaj leki, ustawiaj przypomnienia i śledź przyjmowanie za pomocą interfejsu, który po prostu działa.",
+    detailText1b: "Bez skomplikowanej konfiguracji. Bez krzywej uczenia się. Po prostu otwórz aplikację i zacznij śledzić.",
+    detailTitle2: "Prywatne i bezpieczne doświadczenie",
+    detailText2: "Twoje dane zdrowotne pozostają na Twoim urządzeniu. Kropka. Bez synchronizacji w chmurze, bez kont, bez śledzenia. Pilik całkowicie szanuje Twoją prywatność.",
+    detailText2b: "Wszystkie informacje o Twoich lekach są przechowywane lokalnie i zabezpieczone wbudowanym szyfrowaniem Twojego urządzenia.",
+    faqTitle: "Często zadawane pytania",
+    faqSubtitle: "Znajdź odpowiedzi na często zadawane pytania o Pilik",
+    faqs: [
+      { q: "Czy moje dane są bezpieczne?", a: "Tak! Wszystkie Twoje dane są przechowywane tylko na Twoim urządzeniu. Nigdy nie przesyłamy niczego do chmury ani na serwery. Informacje o Twoich lekach pozostają całkowicie prywatne." },
+      { q: "Czy potrzebuję konta?", a: "Konto nie jest potrzebne. Pilik działa całkowicie na Twoim urządzeniu bez konieczności rejestracji lub logowania." },
+      { q: "Czy mogę używać Pilik na wielu urządzeniach?", a: "Obecnie Pilik przechowuje dane lokalnie na każdym urządzeniu. Pracujemy nad opcjami bezpiecznej synchronizacji w przyszłych aktualizacjach." },
+      { q: "Jakie języki są obsługiwane?", a: "Pilik obsługuje angielski, rosyjski, ukraiński, czeski, francuski, niemiecki, włoski, polski i hiszpański." }
+    ],
+    ctaTitle: "Pobierz Pilik, aby zacząć",
+    ctaSubtitle: "Dołącz do tysięcy użytkowników zarządzających swoimi lekami z łatwością",
+    ctaDownload: "Pobierz w App Store",
+    footerDesc: "Prosty, prywatny i niezawodny tracker leków dla iOS.",
+    footerProduct: "Produkt",
+    footerFeatures: "Funkcje",
+    footerDownload: "Pobierz",
+    footerSupport: "Wsparcie",
+    footerBug: "Zgłoś błąd",
+    footerLegal: "Informacje prawne",
+    footerTerms: "Warunki",
+    footerPrivacy: "Prywatność"
+  },
+  es: {
+    navDownload: "Descargar",
+    heroTitle: "El rastreador de medicamentos más seguro y fácil de usar",
+    heroSubtitle: "Mantente al día con tu rutina de medicamentos. Recordatorios simples, datos privados, diseño moderno.",
+    heroDownload: "Descargar app",
+    heroLearn: "Saber más",
+    featuresTitle: "Nuestras principales características",
+    featuresSubtitle: "Todo lo que necesitas para seguir tus medicamentos",
+    features: [
+      { icon: "🔔", title: "Recordatorios inteligentes", text: "Recibe notificaciones exactamente cuando es hora de tomar tus medicamentos. Sin estrés, sin dosis perdidas." },
+      { icon: "🎨", title: "Interfaz limpia", text: "Una interfaz tranquila y moderna diseñada para ayudarte a concentrarte en lo que realmente importa." },
+      { icon: "🔒", title: "Privado y seguro", text: "Todos los datos se almacenan solo en tu dispositivo. Sin nube. Sin rastreo. Nunca." },
+      { icon: "🌍", title: "Multiidioma", text: "Usa Pilik en tu propio idioma. Interfaz completamente localizada." }
+    ],
+    detailTitle1: "Suave y simple de usar",
+    detailText1: "Experimenta un rastreador de medicamentos diseñado pensando en la simplicidad. Agrega medicamentos, configura recordatorios y rastrea tu adherencia con una interfaz que simplemente funciona.",
+    detailText1b: "Sin configuración complicada. Sin curva de aprendizaje. Simplemente abre la aplicación y comienza a rastrear.",
+    detailTitle2: "Una experiencia privada y segura",
+    detailText2: "Tus datos de salud permanecen en tu dispositivo. Punto. Sin sincronización en la nube, sin cuentas, sin rastreo. Pilik respeta completamente tu privacidad.",
+    detailText2b: "Toda tu información de medicamentos se almacena localmente y está protegida con el cifrado integrado de tu dispositivo.",
+    faqTitle: "Preguntas frecuentes",
+    faqSubtitle: "Encuentra respuestas a preguntas comunes sobre Pilik",
+    faqs: [
+      { q: "¿Están seguros mis datos?", a: "¡Sí! Todos tus datos se almacenan solo en tu dispositivo. Nunca subimos nada a la nube o servidores. Tu información de medicamentos permanece completamente privada." },
+      { q: "¿Necesito una cuenta?", a: "No se necesita cuenta. Pilik funciona completamente en tu dispositivo sin requerir registro o inicio de sesión." },
+      { q: "¿Puedo usar Pilik en varios dispositivos?", a: "Actualmente, Pilik almacena datos localmente en cada dispositivo. Estamos trabajando en opciones de sincronización segura para futuras actualizaciones." },
+      { q: "¿Qué idiomas son compatibles?", a: "Pilik admite inglés, ruso, ucraniano, checo, francés, alemán, italiano, polaco y español." }
+    ],
+    ctaTitle: "Descarga Pilik para comenzar",
+    ctaSubtitle: "Únete a miles de usuarios que gestionan sus medicamentos con facilidad",
+    ctaDownload: "Descargar en App Store",
+    footerDesc: "El rastreador de medicamentos simple, privado y confiable para iOS.",
+    footerProduct: "Producto",
+    footerFeatures: "Características",
+    footerDownload: "Descargar",
+    footerSupport: "Soporte",
+    footerBug: "Reportar error",
+    footerLegal: "Legal",
+    footerTerms: "Términos",
+    footerPrivacy: "Privacidad"
+  },
+  ru: {
+    navDownload: "Скачать",
+    heroTitle: "Самый безопасный и удобный трекер приёма лекарств",
+    heroSubtitle: "Будьте вовремя с приёмом лекарств. Простые напоминания, приватные данные, современный дизайн.",
+    heroDownload: "Скачать приложение",
+    heroLearn: "Узнать больше",
+    featuresTitle: "Основные возможности",
+    featuresSubtitle: "Всё необходимое для контроля приёма лекарств",
+    features: [
+      { icon: "🔔", title: "Умные напоминания", text: "Получайте уведомления точно в нужный момент. Никакого стресса, никаких пропусков." },
+      { icon: "🎨", title: "Чистый интерфейс", text: "Современный минималистичный дизайн, который помогает сосредоточиться на главном." },
+      { icon: "🔒", title: "Полная конфиденциальность", text: "Все данные хранятся только на вашем устройстве. Без облака. Без слежки. Никогда." },
+      { icon: "🌍", title: "Многоязычность", text: "Используйте Pilik на своём языке. Полностью локализованный интерфейс." }
+    ],
+    detailTitle1: "Плавно и просто в использовании",
+    detailText1: "Трекер лекарств, созданный с упором на простоту. Добавляйте лекарства, ставьте напоминания и отслеживайте приём с интерфейсом, который просто работает.",
+    detailText1b: "Никаких сложных настроек. Никакого обучения. Просто откройте приложение и начните отслеживать.",
+    detailTitle2: "Приватный и безопасный опыт",
+    detailText2: "Ваши медицинские данные остаются на вашем устройстве. Точка. Никакой синхронизации с облаком, аккаунтов или слежки. Pilik полностью уважает вашу конфиденциальность.",
+    detailText2b: "Вся информация о лекарствах хранится локально и защищена встроенным шифрованием вашего устройства.",
+    faqTitle: "Частые вопросы",
+    faqSubtitle: "Найдите ответы на распространённые вопросы о Pilik",
+    faqs: [
+      { q: "Безопасны ли мои данные?", a: "Да! Все ваши данные хранятся только на вашем устройстве. Мы никогда ничего не загружаем в облако или на серверы. Информация о ваших лекарствах остаётся полностью приватной." },
+      { q: "Нужен ли аккаунт?", a: "Аккаунт не нужен. Pilik работает полностью на вашем устройстве без регистрации или входа." },
+      { q: "Могу ли я использовать Pilik на нескольких устройствах?", a: "Сейчас Pilik хранит данные локально на каждом устройстве. Мы работаем над безопасной синхронизацией для будущих обновлений." },
+      { q: "Какие языки поддерживаются?", a: "Pilik поддерживает английский, русский, украинский, чешский, французский, немецкий, итальянский, польский и испанский." }
+    ],
+    ctaTitle: "Скачайте Pilik, чтобы начать",
+    ctaSubtitle: "Присоединяйтесь к тысячам пользователей, управляющих своими лекарствами с лёгкостью",
+    ctaDownload: "Скачать в App Store",
+    footerDesc: "Простой, приватный и надёжный трекер лекарств для iOS.",
+    footerProduct: "Продукт",
+    footerFeatures: "Возможности",
+    footerDownload: "Скачать",
+    footerSupport: "Поддержка",
+    footerBug: "Сообщить об ошибке",
+    footerLegal: "Правовая информация",
+    footerTerms: "Условия",
+    footerPrivacy: "Конфиденциальность"
+  },
+  uk: {
+    navDownload: "Завантажити",
+    heroTitle: "Найбезпечніший і найзручніший трекер прийому ліків",
+    heroSubtitle: "Будьте вчасно з прийомом ліків. Прості нагадування, приватні дані, сучасний дизайн.",
+    heroDownload: "Завантажити застосунок",
+    heroLearn: "Дізнатися більше",
+    featuresTitle: "Основні можливості",
+    featuresSubtitle: "Все необхідне для контролю прийому ліків",
+    features: [
+      { icon: "🔔", title: "Розумні нагадування", text: "Отримуйте сповіщення точно в потрібний момент. Без стресу, без пропусків." },
+      { icon: "🎨", title: "Чистий інтерфейс", text: "Сучасний мінімалістичний дизайн, який допомагає зосередитись на головному." },
+      { icon: "🔒", title: "Повна конфіденційність", text: "Усі дані зберігаються тільки на вашому пристрої. Без хмари. Без стеження. Ніколи." },
+      { icon: "🌍", title: "Багатомовність", text: "Використовуйте Pilik своєю мовою. Повністю локалізований інтерфейс." }
+    ],
+    detailTitle1: "Плавно і просто у використанні",
+    detailText1: "Трекер ліків, створений з акцентом на простоту. Додавайте ліки, встановлюйте нагадування і відстежуйте прийом з інтерфейсом, який просто працює.",
+    detailText1b: "Ніяких складних налаштувань. Ніякого навчання. Просто відкрийте застосунок і почніть відстежувати.",
+    detailTitle2: "Приватний і безпечний досвід",
+    detailText2: "Ваші медичні дані залишаються на вашому пристрої. Крапка. Ніякої синхронізації з хмарою, акаунтів чи стеження. Pilik повністю поважає вашу конфіденційність.",
+    detailText2b: "Уся інформація про ліки зберігається локально і захищена вбудованим шифруванням вашого пристрою.",
+    faqTitle: "Часті питання",
+    faqSubtitle: "Знайдіть відповіді на поширені питання про Pilik",
+    faqs: [
+      { q: "Чи безпечні мої дані?", a: "Так! Усі ваші дані зберігаються тільки на вашому пристрої. Ми ніколи нічого не завантажуємо в хмару чи на сервери. Інформація про ваші ліки залишається повністю приватною." },
+      { q: "Чи потрібен акаунт?", a: "Акаунт не потрібен. Pilik працює повністю на вашому пристрої без реєстрації чи входу." },
+      { q: "Чи можу я використовувати Pilik на кількох пристроях?", a: "Наразі Pilik зберігає дані локально на кожному пристрої. Ми працюємо над безпечною синхронізацією для майбутніх оновлень." },
+      { q: "Які мови підтримуються?", a: "Pilik підтримує англійську, російську, українську, чеську, французьку, німецьку, італійську, польську та іспанську." }
+    ],
+    ctaTitle: "Завантажте Pilik, щоб почати",
+    ctaSubtitle: "Приєднуйтесь до тисяч користувачів, які керують своїми ліками з легкістю",
+    ctaDownload: "Завантажити в App Store",
+    footerDesc: "Простий, приватний і надійний трекер ліків для iOS.",
+    footerProduct: "Продукт",
+    footerFeatures: "Можливості",
+    footerDownload: "Завантажити",
+    footerSupport: "Підтримка",
+    footerBug: "Повідомити про помилку",
+    footerLegal: "Правова інформація",
+    footerTerms: "Умови",
+    footerPrivacy: "Конфіденційність"
+  }
+};
 
     function renderContent(lang) {
       const t = translations[lang] || translations.en;
